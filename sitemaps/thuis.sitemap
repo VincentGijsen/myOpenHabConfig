@@ -1,0 +1,28 @@
+sitemap thuis label="De Loft"
+{
+   
+           	Frame label="House" icon="house" {
+          	  Group item=gWoonkamer label="Living"
+          	  Group item=gKeuken label="Kitchen"
+          	  Group item=gHall label="Hall"
+          	  Group item=gSleeping label="Sleeping"
+            }
+            
+            Frame label="At Home"
+            {
+            	Switch item=MyMobile
+            	Group item=gBluetooth label="@home"	
+            }
+            		
+            Frame label="Weather"{
+            	Text item=Weather_Temperature {
+				Frame {
+					Text item=Weather_Temp_Max
+					Text item=Weather_Temp_Min
+				}
+				Frame {
+					Chart item=Weather_Chart period=h refresh=10000
+				}
+            }
+            }
+}

@@ -1,0 +1,50 @@
+var String ArduinoUpdate = ""
+var Boolean inPackage = false
+
+
+rule "Arduino on update"
+	when 
+		Item Arduino received update
+	then
+		if(inPackage){
+		    ArduinoUpdate = ArduinoUpdate + Arduino.state.toString.trim
+		    println("ArduinoUpdate -> " + ArduinoUpdate)
+		    if (ArduinoUpdate.contains(";")) {
+				if (ArduinoUpdate.contains("item=B1")) {
+					postUpdate(Light_GF_Kitchen_Ceiling, if(ArduinoUpdate.contains("value=ON")) ON else OFF)
+				}
+				if (ArduinoUpdate.contains("item=B2")) {
+					postUpdate(Light_GF_Kitchen_Table, if(ArduinoUpdate.contains("value=ON")) ON else OFF)
+				}
+				if (ArduinoUpdate.contains("temp")) {
+					var int valueStartsOn = ArduinoUpdate.indexOf("=") + "=".length
+					var String myTemperatureAsString = ArduinoUpdate.mid(valueStartsOn, ArduinoUpdate.indexOf(';')-valueStartsOn)
+					println(myTemperatureAsString);
+					var Number myTemperature = 0.0f
+					myTemperature = Float::parseFloat(myTemperatureAsString)
+					postUpdate(Temperature_GF_Living, myTemperature)
+			}
+				ArduinoUpdate = ""
+		    }
+	    }
+	    else
+	    {
+	    	if(Arduino.state.toString.trim.contains("[")){
+	    		ArduinoUpdate = ArduinoUpdate + Arduino.state.toString.trim
+	    		inPackage= true;
+	    	}
+	    	println("invalid datea: " + Arduino.state.toString);
+	    	
+	    }
+end
+
+
+rule "Update max and min temperatures"
+when
+	Item Weather_Temperature changed or
+	Time cron "0 0 0 * * ?" or
+	System started
+then	
+	postUpdate(Weather_Temp_Max, Weather_Temperature.maximumSince(now.toDateMidnight).state)
+	postUpdate(Weather_Temp_Min, Weather_Temperature.minimumSince(now.toDateMidnight).state)
+end
