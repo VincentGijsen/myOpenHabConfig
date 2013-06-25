@@ -1,12 +1,23 @@
 sitemap thuis label="De Loft"
 {
-   
+   		
            	Frame label="House" icon="house" {
           	  Group item=gWoonkamer label="Living"
           	  Group item=gKeuken label="Kitchen"
           	  Group item=gHall label="Hall"
           	  Group item=gSleeping label="Sleeping"
             }
+            
+            Frame label="Moods"
+            {
+            	Switch item=moodAway
+            	Switch item=moodMovie
+            	Switch item=moodWork
+            	Switch item=moodCosy
+            	Switch item=moodDiner
+            	
+            }
+          
             
             Frame label="At Home"
             {
