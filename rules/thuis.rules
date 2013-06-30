@@ -1,50 +1,28 @@
-var String ArduinoUpdate = ""
-var Boolean inPackage = false
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import java.lang.Math.*
 
 
-rule "Arduino on update"
-	when 
-		Item Arduino received update
+rule "BedLight"
+	when
+		Item DimmedBedLight received command
 	then
-		if(inPackage){
-		    ArduinoUpdate = ArduinoUpdate + Arduino.state.toString.trim
-		    println("ArduinoUpdate -> " + ArduinoUpdate)
-		    if (ArduinoUpdate.contains(";")) {
-				if (ArduinoUpdate.contains("item=B1")) {
-					postUpdate(Light_GF_Kitchen_Ceiling, if(ArduinoUpdate.contains("value=ON")) ON else OFF)
-				}
-				if (ArduinoUpdate.contains("item=B2")) {
-					postUpdate(Light_GF_Kitchen_Table, if(ArduinoUpdate.contains("value=ON")) ON else OFF)
-				}
-				if (ArduinoUpdate.contains("temp")) {
-					var int valueStartsOn = ArduinoUpdate.indexOf("=") + "=".length
-					var String myTemperatureAsString = ArduinoUpdate.mid(valueStartsOn, ArduinoUpdate.indexOf(';')-valueStartsOn)
-					println(myTemperatureAsString);
-					var Number myTemperature = 0.0f
-					myTemperature = Float::parseFloat(myTemperatureAsString)
-					postUpdate(Temperature_GF_Living, myTemperature)
-			}
-				ArduinoUpdate = ""
-		    }
-	    }
-	    else
-	    {
-	    	if(Arduino.state.toString.trim.contains("[")){
-	    		ArduinoUpdate = ArduinoUpdate + Arduino.state.toString.trim
-	    		inPackage= true;
-	    	}
-	    	println("invalid datea: " + Arduino.state.toString);
-	    	
-	    }
-end
-
-
-rule "Update max and min temperatures"
-when
-	Item Weather_Temperature changed or
-	Time cron "0 0 0 * * ?" or
-	System started
-then	
-	postUpdate(Weather_Temp_Max, Weather_Temperature.maximumSince(now.toDateMidnight).state)
-	postUpdate(Weather_Temp_Min, Weather_Temperature.minimumSince(now.toDateMidnight).state)
+	
+		var Number percent = 0
+	
+		if(DimmedBedLight.state instanceof DecimalType) percent = DimmedBedLight.state as DecimalType 
+			
+		if(receivedCommand==INCREASE) percent = percent + 5
+		if(receivedCommand==DECREASE) percent = percent - 5
+		if(receivedCommand==OFF) percent = 0
+		
+		if(percent<0)   percent = 0
+		if(percent>100) percent = 100
+		
+		
+		//we scale decimally, not hexadicimal!
+		val Number scale = Math::floor( percent.floatValue * 1.27).intValue
+		sendCommand(Msp, "LEDC1" + "\u0004" +  String::format("%c", scale) +"\n")
+		postUpdate(DimmedBedLight, percent);
 end

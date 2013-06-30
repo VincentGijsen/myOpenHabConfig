@@ -7,8 +7,9 @@ Group gHall			"Hall" <wardrobe> (gApp)
 Group gSleeping		"Masters bedroom" <bedroom> (gApp)
 Group gBluetooth 	"Bluetooth devs" <bluetooth> (gApp)
 
+Group:Switch:OR(ON, OFF) 		Lights 		"All lights [(%d)]" 	
 
-String Arduino  "eval arduino"  { serial="/dev/tty.uart-A9FF427A4D103A37" }
+String Msp  "eval mspServer"  { serial="/dev/tty.uart-A9FF427A4D103A37" }
 
 /* tv-corner */
 
@@ -17,14 +18,15 @@ String Arduino  "eval arduino"  { serial="/dev/tty.uart-A9FF427A4D103A37" }
 Switch moodAway "Away" 
 Switch moodWork "Work"
 Switch moodMovie "Movie" <video>
-Switch moodCosy "Cosy"
+Switch moodCozy "Cozy"
 Switch moodDiner "Diner"
+Switch moodSleep "Sleep"
 
 
 
 /* Woonkamer */
-Color leftColor "left color bar" (gWoonkamer, Colorize) {}
-Color rightColor "left color bar" (gWoonkamer, Colorize) {}
+Color leftColor "left color bar" (gWoonkamer, Colorize)
+Color rightColor "left color bar" (gWoonkamer, Colorize)
 
 
 Switch Light_hoek       "TV-hoek"           (gWoonkamer, Lights) {exec="ON:elro@@31@@A@@on, OFF:elro@@31@@A@@off"}
@@ -36,7 +38,7 @@ Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) {exec="ON:elro@
 
 
 /* Slaapkamer */
-Dimmer dimmer_Bedlight "BedLight"		(gSleeping, Dimmers)
+Dimmer DimmedBedLight "Dimmer [%d %%]" (gSleeping, Lights)
 
 /* versterker */
 
@@ -45,9 +47,8 @@ Number Temperature_GF_Living    "Temperature [%.1f °C]" <temperature>   (gLR)
 
 
 
-DateTime		Date			"Date [%1$tA, %1$td.%1$tm.%1$tY]"	<calendar>	{ ntp="Europe/Berlin:de_DE" }
-DateTime        SunRise "Sonnenaufgang [%1$tA, %1$td.%1$tm.%1$tY %1$tT]"                <clock>
-DateTime        SunSet  "Sonnenuntergang [%1$tA, %1$td.%1$tm.%1$tY %1$tT]"         <clock>
+DateTime		Date    "Date [%1$tA, %1$td.%1$tm.%1$tY]"	<calendar>	{ ntp="Europe/Berlin:en_EN" }
+
 
 
 Switch MyMobile          "My Phone" (gBluetooth, Bluetooth)                                 { bluetooth="EC852F824204" }

@@ -1,0 +1,69 @@
+
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+
+var Timer timer = null
+
+
+rule "Away Mood" 
+	when 
+		Item moodAway received command
+	then
+		if(receivedCommand==ON) {
+		
+		/*
+		 * Kill all lights
+		 */
+		Lights?.members.forEach(light| sendCommand(light, OFF) )			
+			
+		
+		postUpdate(moodMovie, OFF)
+		postUpdate(moodWork, OFF)
+		postUpdate(moodCozy, OFF)
+		postUpdate(moodDiner, OFF)	
+		}
+	
+
+end
+
+
+rule "mood Movie" 
+	when 
+		Item moodMovie received command
+	then
+		if(receivedCommand==ON) {
+		
+		postUpdate(DimmedBedLight, OFF);
+			
+		
+		postUpdate(moodAway, OFF)
+		postUpdate(moodWork, OFF)
+		postUpdate(moodCozy, OFF)
+		postUpdate(moodDiner, OFF)	
+		}
+	
+
+end
+
+
+rule "mood Work" 
+	when 
+		Item moodWork received command
+	then
+		if(receivedCommand==ON) {
+		
+		/*
+		 * Kill all lights
+		 */
+		Lights?.members.forEach(light| postUpdate(light, OFF) )			
+			
+		
+		postUpdate(moodAway, OFF)
+		postUpdate(moodMovie, OFF)
+		postUpdate(moodCozy, OFF)
+		postUpdate(moodDiner, OFF)	
+		}
+	
+
+end

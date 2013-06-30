@@ -1,0 +1,38 @@
+
+var String MspUpdate = ""
+
+var Boolean inPackage = false
+
+
+rule "Arduino on update"
+	when 
+		Item Arduino received update
+	then
+		if(inPackage){
+		    MspUpdate = MspUpdate + Msp.state.toString.trim
+		    println("ArduinoUpdate -> " + MspUpdate)
+		    if (MspUpdate.contains(";")) {
+				if (MspUpdate.contains("temp")) {
+					var int valueStartsOn = MspUpdate.indexOf("=") + "=".length
+					var String myTemperatureAsString = MspUpdate.mid(valueStartsOn, MspUpdate.indexOf(';')-valueStartsOn)
+					println(myTemperatureAsString);
+					var Number myTemperature = 0.0f
+					myTemperature = Float::parseFloat(myTemperatureAsString)
+					postUpdate(Temperature_GF_Living, myTemperature)
+				}
+				if (MspUpdate.contains("]p")){
+					//println("Received ping from: " + MspUpdate.mid(1,6))
+				}
+				MspUpdate = ""
+		    }
+	    }
+	    else
+	    {
+	    	if(Msp.state.toString.trim.contains("[")){
+	    		MspUpdate = MspUpdate + Msp.state.toString.trim
+	    		inPackage= true;
+	    	}
+	    	//println("invalid data: " + Msp.state.toString);
+	    	
+	    }
+end
