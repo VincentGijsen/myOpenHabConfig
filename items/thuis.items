@@ -8,6 +8,7 @@ Group gSleeping		"Masters bedroom" <bedroom> (gApp)
 Group gBluetooth 	"Bluetooth devs" <bluetooth> (gApp)
 
 Group:Switch:OR(ON, OFF) 		Lights 		"All lights [(%d)]" 	
+Group:Number:AVG 				Temperature	"Avg. Room Temperature [%.1f °C]" 	<temperature>	(Status)
 
 String Msp  "eval mspServer"  { serial="/dev/tty.uart-A9FF427A4D103A37" }
 
@@ -47,7 +48,7 @@ Number Temperature_GF_Living    "Temperature [%.1f °C]" <temperature>   (gLR)
 
 
 
-DateTime		Date    "Date [%1$tA, %1$td.%1$tm.%1$tY]"	<calendar>	{ ntp="Europe/Berlin:en_EN" }
+DateTime		Date    "Date [%1$tA, %1$td.%1$tm.%1$tY]"	<calendar>	{ ntp="Europe/Amsterdam:nl_NL" }
 
 
 
