@@ -1,0 +1,9 @@
+
+/*
+		 * Kill all lights
+		 */
+Lights?.members.forEach(light| postUpdate(light, OFF) )			
+postUpdate(moodAway, OFF)
+postUpdate(moodMovie, OFF)
+postUpdate(moodCozy, OFF)
+postUpdate(moodDiner, OFF)	

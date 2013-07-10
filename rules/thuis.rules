@@ -3,13 +3,21 @@ import org.openhab.core.persistence.*
 import org.openhab.model.script.actions.*
 import java.lang.Math.*
 
+//1.27 = 100%, but leds are ~even bright at ~80%
+var float rscalar = (1.27 * 0.8).floatValue()
+var float gscalar = (1.27 * 0.01).floatValue()
+var float bscalar = (1.27 * 1.0).floatValue()
+
+
+var String BRIGHTNESS_PACKET = "d"
+var String RGB_PACKET = "r"
+
 
 rule "BedLight"
 	when
 		Item DimmedBedLight received command
 	then
-	
-		var Number percent = 0
+	    var Number percent = 0
 	
 		if(DimmedBedLight.state instanceof DecimalType) percent = DimmedBedLight.state as DecimalType 
 			
@@ -23,6 +31,30 @@ rule "BedLight"
 		
 		//we scale decimally, not hexadicimal!
 		val Number scale = Math::floor( percent.floatValue * 1.27).intValue
-		sendCommand(Msp, "LEDC1" + "\u0004" +  String::format("%c", scale) +"\n")
+		sendCommand(Msp, "R2" + RGB_PACKET +  String::format("%c", scale) +"\n")
 		postUpdate(DimmedBedLight, percent);
+end
+
+rule "RGB Links"
+	when Item  leftColor received command
+	then
+	var HSBType hsbType
+	if (leftColor.state instanceof HSBType) hsbType = leftColor.state as HSBType
+	
+	var r = String::format("%c", Math::floor( hsbType.red.floatValue * rscalar).intValue())
+	var g = String::format("%c", Math::floor( hsbType.green.floatValue * gscalar).intValue())
+	var b = String::format("%c", Math::floor( hsbType.blue.floatValue * bscalar).intValue())
+	
+	println(String::format("Color settings: %d %d %d", hsbType.red.intValue(), hsbType.green.intValue(), 
+			hsbType.blue.intValue()
+	))
+	println(String::format("R2r: %s - g: %s - b: %s\n",  r,g,b))
+	
+	sendCommand(Msp, String::format("R2%s%s%s%s\n", RGB_PACKET,r,g,b))
+end
+
+rule "onkyo Test"
+when Item onkyoArtist received command
+then
+	//hometheater.OnkyoBindingProvider
 end

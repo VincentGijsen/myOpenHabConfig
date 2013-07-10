@@ -6,7 +6,9 @@ Group gKeuken 		"Kitchen" <kitchen> (gApp)
 Group gHall			"Hall" <wardrobe> (gApp)
 Group gSleeping		"Masters bedroom" <bedroom> (gApp)
 Group gBluetooth 	"Bluetooth devs" <bluetooth> (gApp)
+Group gRadio		"Onkyo" <audio> (gApp)
 
+Group:Switch:OR(ON, OFF)		Moods		"All Moods [(%d)]"
 Group:Switch:OR(ON, OFF) 		Lights 		"All lights [(%d)]" 	
 Group:Number:AVG 				Temperature	"Avg. Room Temperature [%.1f °C]" 	<temperature>	(Status)
 
@@ -16,17 +18,17 @@ String Msp  "eval mspServer"  { serial="/dev/tty.uart-A9FF427A4D103A37" }
 
 /*MOODS */
 
-Switch moodAway "Away" 
-Switch moodWork "Work"
-Switch moodMovie "Movie" <video>
-Switch moodCozy "Cozy"
-Switch moodDiner "Diner"
-Switch moodSleep "Sleep"
+Switch moodAway "Away" (Moods)
+Switch moodWork "Work"  (Moods)
+Switch moodMovie "Movie" <video>  (Moods)
+Switch moodCozy "Cozy"  (Moods)
+Switch moodDiner "Diner"  (Moods)
+Switch moodSleep "Sleep"  (Moods)
 
 
 
 /* Woonkamer */
-Color leftColor "left color bar" (gWoonkamer, Colorize)
+Color leftColor "left color bar" (gWoonkamer, Colorize) 
 Color rightColor "left color bar" (gWoonkamer, Colorize)
 
 
@@ -42,16 +44,24 @@ Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) {exec="ON:elro@
 Dimmer DimmedBedLight "Dimmer [%d %%]" (gSleeping, Lights)
 
 /* versterker */
+Switch onkyoArtist "Artist: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ARTIST_QUERY"}
+String onkyoAlbum "Album: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ALBUM_QUERY"}
+String onkyoTitle "Title: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_TITLE_QUERY"}
+String onkyoStatus "Status: [%s]"		(gRadio) {onkyo="ON:hometheater:NETUSB_PLAY_STATUS_QUERY"}
 
-Group Temp_Thuis
-Number Temperature_GF_Living    "Temperature [%.1f °C]" <temperature>   (gLR)
+Switch onkyoPower 	"Power"				(gRadio) {onkyo="ON:hometheater:POWER_ON, OFF:hometheater:POWER_OFF"}
+Dimmer onkyoVolume 	"Volume"			(gRadio) {onkyo="INCREASE:hometheater:VOLUME_UP, DECREASE:hometheater:VOLUME_DOWN"}
+Switch onkyoSrcNas  "Src: Nas"			(gRadio) {onkyo="ON:hometheater:SOURCE_MUSICSERVER"}
+Switch onkyoSrcFavs "SRC Favs" 			(gRadio) {onkyo="ON:hometheater:SOURCE_INTERETRADIO"}
+Switch onkyoSrcNet "SRC UP"			(gRadio) {onkyo="ON:hometheater:SOURCE_UP"}
+Switch onkyoSrcAux  "Src Aux" 			(gRadio) {onkyo="ON:hometheater:SOURCE_AUX"}
+Switch onkyoSrcAppleTv "SRC AppleTv" 	(gRadio) {onkyo="ON:hometheater:SOURCE_COMPUTER"}
+Switch onkyoSrcSirius "SRC Sirius" 	(gRadio) {onkyo="ON:hometheater:NETUSB_OP_TOPMENU"}
 
-
-
+/*
+ * General stuff
+ */
 DateTime		Date    "Date [%1$tA, %1$td.%1$tm.%1$tY]"	<calendar>	{ ntp="Europe/Amsterdam:nl_NL" }
-
-
-
 Switch MyMobile          "My Phone" (gBluetooth, Bluetooth)                                 { bluetooth="EC852F824204" }
 String UnknownDevices    "Unknown devices in range: [%s]" (gBluetooth , Bluetooth) { bluetooth="?" }
 Number NoOfPairedDevices "Paired devices in range: [%d]"  (gBluetooth , Bluetooth) { bluetooth="!" }

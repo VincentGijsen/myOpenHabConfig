@@ -22,6 +22,9 @@ sitemap thuis label="De Hut"
           	  Group item=gSleeping label="Sleeping"
             }
             
+            Frame label="Radio" icon="radio" {
+            	Group item=gRadio
+            }
             
           
             

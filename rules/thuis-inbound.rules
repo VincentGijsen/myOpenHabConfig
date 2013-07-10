@@ -4,13 +4,13 @@ var String MspUpdate = ""
 var Boolean inPackage = false
 
 
-rule "Arduino on update"
+rule "MSP on update"
 	when 
 		Item Arduino received update
 	then
 		if(inPackage){
 		    MspUpdate = MspUpdate + Msp.state.toString.trim
-		    println("ArduinoUpdate -> " + MspUpdate)
+		    println("MSPupdate -> " + MspUpdate)
 		    if (MspUpdate.contains(";")) {
 				if (MspUpdate.contains("temp")) {
 					var int valueStartsOn = MspUpdate.indexOf("=") + "=".length
