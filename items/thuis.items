@@ -12,7 +12,7 @@ Group:Switch:OR(ON, OFF)		Moods		"All Moods [(%d)]"
 Group:Switch:OR(ON, OFF) 		Lights 		"All lights [(%d)]" 	
 Group:Number:AVG 				Temperature	"Avg. Room Temperature [%.1f °C]" 	<temperature>	(Status)
 
-String Msp  "eval mspServer"  { serial="/dev/ttyACM0" }
+String Msp  "eval mspServer"  { serial="/dev/ttyUSB0" }
 
 /* tv-corner */
 
