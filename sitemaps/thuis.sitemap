@@ -30,8 +30,10 @@ sitemap thuis label="De Hut"
             
             Frame label="At Home"
             {
-            	Switch item=MyMobile
-            	Group item=gBluetooth label="@home"	
+            	Group item=Status
+            	Switch item=netIPhone
+            	//Switch item=myWifiPhone
+            	//Group item=gBluetooth label="@home"	
             }
             		
             Frame label="Weather"{
