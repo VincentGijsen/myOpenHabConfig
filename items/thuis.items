@@ -73,7 +73,7 @@ Number 		NoOfPairedDevices "Paired devices in range: [%d]"  (gBluetooth , Blueto
  * Phones (via wifi)
  * 
  */
- Switch netIPhone   "Me" 			<present>		(Status, Phone) 	{nh="Vincent Gijsen's iPhone"}
+ Switch netIPhone   "Me" 			<present>		(Status, Phone) 	{nh="192.168.1.37"}
  Switch netAir		"my Macbook"	<network>	(Status, Network)	{nh="vincentair.lan"}
  Switch netNas 		"ReadyNas"		<network>	(Status, Network) 	{nh="readynas"}
  Switch netGoogle	"Google.com"	<network>	(Status, Network) 	{nh="www.google.com:80"}
