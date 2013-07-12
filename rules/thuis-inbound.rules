@@ -1,4 +1,4 @@
-
+	
 var String MspUpdate = ""
 
 var Boolean inPackage = false
@@ -6,7 +6,7 @@ var Boolean inPackage = false
 
 rule "MSP on update"
 	when 
-		Item Arduino received update
+		Item Msp received update
 	then
 		if(inPackage){
 		    MspUpdate = MspUpdate + Msp.state.toString.trim
@@ -32,7 +32,7 @@ rule "MSP on update"
 	    		MspUpdate = MspUpdate + Msp.state.toString.trim
 	    		inPackage= true;
 	    	}
-	    	//println("invalid data: " + Msp.state.toString);
+	    	println("invalid data: " + Msp.state.toString);
 	    	
 	    }
 end

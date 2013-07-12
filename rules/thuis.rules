@@ -10,13 +10,13 @@ var float bscalar = (1.27 * 1.0).floatValue()
 
 
 
-rule "L1"
+rule "L3 Bedlight RGB"
 	when
-		Item L1 received command
+		Item L3 received command
 	then
 	    var Number percent = 0
 	
-		if(L1.state instanceof DecimalType) percent = L1.state as DecimalType 
+		if(L3.state instanceof DecimalType) percent = L3.state as DecimalType 
 			
 		if(receivedCommand==INCREASE) percent = percent + 5
 		if(receivedCommand==DECREASE) percent = percent - 5
@@ -28,17 +28,17 @@ rule "L1"
 		
 		//we scale decimally, not hexadicimal!
 		val Number scale = Math::floor( percent.floatValue * 1.27).intValue
-		val cmd = String::format("L1r%c\n", scale )
+		val cmd = String::format("L3r%c\n", scale )
 		logInfo("bedlight" , "bedLight send " + cmd)
 		sendCommand(Msp, cmd)
-		postUpdate(L1, percent);
+		postUpdate(L3, percent);
 end
 
 rule "RGB Links"
-	when Item  R1 received command
+	when Item  LA received command
 	then
 	var HSBType hsbType
-	if (R1.state instanceof HSBType) hsbType = R1.state as HSBType
+	if (LA.state instanceof HSBType) hsbType = LA.state as HSBType
 	
 	var r = String::format("%c", Math::floor( hsbType.red.floatValue * rscalar).intValue())
 	var g = String::format("%c", Math::floor( hsbType.green.floatValue * gscalar).intValue())
@@ -47,7 +47,7 @@ rule "RGB Links"
 	println(String::format("Color settings: %d %d %d", hsbType.red.intValue(), hsbType.green.intValue(), 
 			hsbType.blue.intValue()
 	))
-	var cmd = String::format("R1r%c%c%c\n",  r,g,b)
+	var cmd = String::format("LAr%c%c%c\n",  r,g,b)
 	logInfo("RGB links", "cmd: " + cmd)
 	
 	sendCommand(Msp, cmd)
