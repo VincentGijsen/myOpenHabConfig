@@ -1,0 +1,20 @@
+Number oldState = null
+var scenestate = restoreStates(null)
+
+if (oldScene == null){
+		
+	}
+	val currentState = storeStates()
+	if(netIPhone.state==OFF)
+	{
+			scenestate = storeStates(Scene_General)
+		 	postUpdate(Scene_General, 0)
+		 	print("iphone off")
+	}		
+	
+	if (netIPhone.state==ON){
+			restoreStates(scenestate)
+			//postUpdate(Scene_General, 1)
+			print("iphone on")
+
+	}

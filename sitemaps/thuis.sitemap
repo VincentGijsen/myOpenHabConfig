@@ -1,48 +1,48 @@
 sitemap thuis label="De Hut"
 {
-			Frame label="Date" {
-				Text item=Date
-			}
+	Frame label="Date" {
+			Text item=Date
+		}
    
-            
-           	Frame label="House" icon="house" {
-          	  Group item=gWoonkamer label="Living"
-          	  Group item=gKeuken label="Kitchen"
-          	  Group item=gHall label="Hall"
-          	  Group item=gSleeping label="Sleeping"
-            }
-            
-            Frame label="Radio" icon="radio" {
-            	Group item=gRadio
-            	Switch item=onkyoPower label="Poweroff" mappings=[ON="On"]
-            }
-            Frame label="Discrete Widgets" {
-				Switch item=Scene_General label="Scene" mappings=[0=AWAY, 1=TV, 2=Dinner, 3=Work, 4=Movie]
-				Setpoint item=Temperature_Setpoint minValue=16 maxValue=28 step=0.5
-			}
-			
-			Frame label="Radio" {
-				Switch item=radioInput label="Reciever Settings" icon="video" mappings=[0=OFF, 1=TV, 2=XBMC, 3=Spotify]
-			}
-          
-            
-            Frame label="At Home"
-            {
-            	Group item=Status
-        
-            	//Switch item=myWifiPhone
-            	//Group item=gBluetooth label="@home"	
-            }
-            		
-          Frame label="Weather" {
+    Frame label="Your Mood" {
+		Switch item=Scene_General label="Scene" mappings=[0=AWAY, 1=TV, 2=Dinner, 3=Work, 4=Movie, 5=Sleep]
+
+	}
+	
+	Frame label="Radio" {
+		Switch item=Scene_Radio label="Receiver Settings" icon="video" mappings=[0=OFF, 1=TV, 2=XBMC, 3=Net]
+	}
+  
+  	
+  	Frame label="Weather" {
 		Text item=Weather_Temperature {
 			Frame {
 				Text item=Weather_Temp_Max
 				Text item=Weather_Temp_Min
 			}
 			Frame {
-				Chart item=Weather_Chart period=h refresh=10000
+				Chart item=Weather_Chart period=2d refresh=10000
 			}
 		}
 	}
+    
+            
+	Frame label="House" icon="house" {
+  	  Group item=gWoonkamer label="Living"
+  	  Group item=gKeuken label="Kitchen"
+  	  Group item=gHall label="Hall"
+  	  Group item=gSleeping label="Sleeping"
+    }
+    
+    Frame label="Radio" icon="radio" {
+    	Group item=gRadio
+    	Switch item=onkyoPower label="Poweroff" mappings=[ON="On"]
+    }
+  
+    Frame label="At Home"
+    {
+    	Group item=Status icon="boy1"
+    }
+    		
+ 	
 }

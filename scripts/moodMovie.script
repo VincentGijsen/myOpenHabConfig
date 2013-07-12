@@ -1,7 +1,0 @@
-
-
-postUpdate(DimmedBedLight, OFF)
-postUpdate(moodAway, OFF)
-postUpdate(moodWork, OFF)
-postUpdate(moodCozy, OFF)
-postUpdate(moodDiner, OFF)	

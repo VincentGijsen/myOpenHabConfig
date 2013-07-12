@@ -1,36 +1,41 @@
-
+import org.openhab.core.item.*
 import org.openhab.core.library.types.*
 import org.openhab.core.persistence.*
 import org.openhab.model.script.actions.*
 
-var Timer timer = null
+var Number moodState = -1
+var Number audioState = -1
 
 
-rule "Away Mood" 
+rule "iphone detect"
 	when 
-		Item moodAway received command
+		Item netIPhone changed
 	then
-		if(receivedCommand==ON) {
-			callScript("moodAway")
-		}
+	if (moodState==-1){
+		moodState =0;
+	}
+	if (audioState==-1){
+		audioState =0;
+	}
+	
+	
+	if(netIPhone.state==OFF)
+	{	
+		if(Scene_General.state instanceof DecimalType) moodState = Scene_General.state as DecimalType 	
+		if(Scene_Radio.state instanceof DecimalType) audioState = Scene_Radio.state as DecimalType 	
+		
+		postUpdate(Scene_General, 0)
+		postUpdate(Scene_Radio, 0)
+		logInfo("thuis-moods", "stored light state and powering off")
+	}		
+	
+	if (netIPhone.state==ON){
+			postUpdate(Scene_General, moodState)
+			postUpdate(Scene_Radio, audioState)
+			logInfo("thuis-moods", "restoring state to " + moodState)
+	}
+	
+	
 end
 
 
-rule "mood Movie" 
-	when 
-		Item moodMovie received command
-	then
-		if(receivedCommand==ON) {
-			callScript("moodMovie")
-		}
-end
-
-
-rule "mood Work" 
-	when 
-		Item moodWork received command
-	then
-		if(receivedCommand==ON) {
-			callScript("moodWork")
-		}
-end

@@ -13,21 +13,19 @@ Group:Switch:OR(ON, OFF) 		Lights 		"All lights [(%d)]"
 Group:Number:AVG 				Temperature	"Avg. Room Temperature [%.1f °C]" 	<temperature>	(Status)
 
 Group Status		"Status"
-//String Msp  "eval mspServer"  { serial="/dev/null	" }
+String Msp  "eval mspServer"  { serial="/dev/ttyUSB0" }
 
 /* tv-corner */
 
 /*MOODS */
-
-Switch moodAway "Away" (Moods)
-Switch moodWork "Work"  (Moods)
-Switch moodMovie "Movie" <video>  (Moods)
-Switch moodCozy "Cozy"  (Moods)
-Switch moodDiner "Diner"  (Moods)
-Switch moodSleep "Sleep"  (Moods)
-
 Number Scene_General			"Scene"					<sofa>
-Number Temperature_Setpoint 	"Temperature Setpoint" <temperature>
+Number Scene_Radio				"Receiver Setting"		<video>
+
+/**
+ * HELPERS TO MIMIC FUNCTIONS
+ */
+String arg1
+
 
 /* Woonkamer */
 Color leftColor "left color bar" (gWoonkamer, Colorize) 
@@ -46,7 +44,6 @@ Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) {exec="ON:elro@
 Dimmer DimmedBedLight "Dimmer [%d %%]" (gSleeping, Lights)
 
 /* versterker */
-Number radioInput	"Radio src"			/*placeholder for rules */
 Switch onkyoArtist "Artist: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ARTIST_QUERY"}
 String onkyoAlbum "Album: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ALBUM_QUERY"}
 String onkyoTitle "Title: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_TITLE_QUERY"}
@@ -73,8 +70,8 @@ Number 		NoOfPairedDevices "Paired devices in range: [%d]"  (gBluetooth , Blueto
  * Phones (via wifi)
  * 
  */
- Switch netIPhone   "Me" 			<present>		(Status, Phone) 	{nh="192.168.1.37"}
- Switch netAir		"my Macbook"	<network>	(Status, Network)	{nh="vincentair.lan"}
+ Switch netIPhone   "Me" 			<present>		(Status, Phone) {nh="192.168.1.37"}
+ Switch netAir		"my Macbook"	<network>	(Status, Network)	{nh="vincentair"}
  Switch netNas 		"ReadyNas"		<network>	(Status, Network) 	{nh="readynas"}
  Switch netGoogle	"Google.com"	<network>	(Status, Network) 	{nh="www.google.com:80"}
  Switch netMedia	"Xbmc"			<network>	(Status, Network)	{nh="XBMCBUNTU"}

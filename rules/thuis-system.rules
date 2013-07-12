@@ -6,6 +6,8 @@ rule "Initialize light states"
 		Lights?.members.forEach(light|
 			postUpdate(light, OFF)
 		)
+		
+		
 end
 
 
