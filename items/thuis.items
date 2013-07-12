@@ -26,7 +26,8 @@ Switch moodCozy "Cozy"  (Moods)
 Switch moodDiner "Diner"  (Moods)
 Switch moodSleep "Sleep"  (Moods)
 
-
+Number Scene_General			"Scene"					<sofa>
+Number Temperature_Setpoint 	"Temperature Setpoint" <temperature>
 
 /* Woonkamer */
 Color leftColor "left color bar" (gWoonkamer, Colorize) 
@@ -45,12 +46,13 @@ Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) {exec="ON:elro@
 Dimmer DimmedBedLight "Dimmer [%d %%]" (gSleeping, Lights)
 
 /* versterker */
+Number radioInput	"Radio src"			/*placeholder for rules */
 Switch onkyoArtist "Artist: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ARTIST_QUERY"}
 String onkyoAlbum "Album: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ALBUM_QUERY"}
 String onkyoTitle "Title: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_TITLE_QUERY"}
 String onkyoStatus "Status: [%s]"		(gRadio) {onkyo="ON:hometheater:NETUSB_PLAY_STATUS_QUERY"}
 
-Switch onkyoPower 	"Power"				(gRadio) {onkyo="ON:hometheater:POWER_ON, OFF:hometheater:POWER_OFF"}
+Switch onkyoPower 	"Power"				(gRadio) {onkyo="ON:hometheater:POWER_ON, OFF:hometheater:POWER_OFF"} 
 Dimmer onkyoVolume 	"Volume"			(gRadio) {onkyo="INCREASE:hometheater:VOLUME_UP, DECREASE:hometheater:VOLUME_DOWN"}
 Switch onkyoSrcNas  "Src: Nas"			(gRadio) {onkyo="ON:hometheater:SOURCE_MUSICSERVER"}
 Switch onkyoSrcFavs "SRC Favs" 			(gRadio) {onkyo="ON:hometheater:SOURCE_INTERETRADIO"}
@@ -71,9 +73,11 @@ Number 		NoOfPairedDevices "Paired devices in range: [%d]"  (gBluetooth , Blueto
  * Phones (via wifi)
  * 
  */
- Switch netIPhone   "Me" 				(Status, Phone) 	{nh="Vincent Gijsen's iPhone"}
- Switch netNas 		"ReadyNas"			(Status, Network) 	{nh="readynas"}
- Switch netGoogle	"Google.com"		(Status, Network) 	{nh="www.google.com:80"}
+ Switch netIPhone   "Me" 			<present>		(Status, Phone) 	{nh="Vincent Gijsen's iPhone"}
+ Switch netAir		"my Macbook"	<network>	(Status, Network)	{nh="vincentair.lan"}
+ Switch netNas 		"ReadyNas"		<network>	(Status, Network) 	{nh="readynas"}
+ Switch netGoogle	"Google.com"	<network>	(Status, Network) 	{nh="www.google.com:80"}
+ Switch netMedia	"Xbmc"			<network>	(Status, Network)	{nh="XBMCBUNTU"}
 /**
  * WEER MEUK
  */
