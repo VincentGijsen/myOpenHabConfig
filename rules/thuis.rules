@@ -9,17 +9,14 @@ var float gscalar = (1.27 * 0.01).floatValue()
 var float bscalar = (1.27 * 1.0).floatValue()
 
 
-var String BRIGHTNESS_PACKET = "d"
-var String RGB_PACKET = "r"
 
-
-rule "BedLight"
+rule "L1"
 	when
-		Item DimmedBedLight received command
+		Item L1 received command
 	then
 	    var Number percent = 0
 	
-		if(DimmedBedLight.state instanceof DecimalType) percent = DimmedBedLight.state as DecimalType 
+		if(L1.state instanceof DecimalType) percent = L1.state as DecimalType 
 			
 		if(receivedCommand==INCREASE) percent = percent + 5
 		if(receivedCommand==DECREASE) percent = percent - 5
@@ -31,15 +28,17 @@ rule "BedLight"
 		
 		//we scale decimally, not hexadicimal!
 		val Number scale = Math::floor( percent.floatValue * 1.27).intValue
-		sendCommand(Msp, "R2" + RGB_PACKET +  String::format("%c", scale) +"\n")
-		postUpdate(DimmedBedLight, percent);
+		val cmd = String::format("L1r%c\n", scale )
+		logInfo("bedlight" , "bedLight send " + cmd)
+		sendCommand(Msp, cmd)
+		postUpdate(L1, percent);
 end
 
 rule "RGB Links"
-	when Item  leftColor received command
+	when Item  R1 received command
 	then
 	var HSBType hsbType
-	if (leftColor.state instanceof HSBType) hsbType = leftColor.state as HSBType
+	if (R1.state instanceof HSBType) hsbType = R1.state as HSBType
 	
 	var r = String::format("%c", Math::floor( hsbType.red.floatValue * rscalar).intValue())
 	var g = String::format("%c", Math::floor( hsbType.green.floatValue * gscalar).intValue())
@@ -48,13 +47,8 @@ rule "RGB Links"
 	println(String::format("Color settings: %d %d %d", hsbType.red.intValue(), hsbType.green.intValue(), 
 			hsbType.blue.intValue()
 	))
-	println(String::format("R2r: %s - g: %s - b: %s\n",  r,g,b))
+	var cmd = String::format("R1r%c%c%c\n",  r,g,b)
+	logInfo("RGB links", "cmd: " + cmd)
 	
-	sendCommand(Msp, String::format("R2%s%s%s%s\n", RGB_PACKET,r,g,b))
-end
-
-rule "onkyo Test"
-when Item onkyoArtist received command
-then
-	//hometheater.OnkyoBindingProvider
+	sendCommand(Msp, cmd)
 end

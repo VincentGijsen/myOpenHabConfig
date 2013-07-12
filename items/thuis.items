@@ -28,7 +28,7 @@ String arg1
 
 
 /* Woonkamer */
-Color leftColor "left color bar" (gWoonkamer, Colorize) 
+Color R1 "left color bar" (gWoonkamer, Colorize) 
 Color rightColor "left color bar" (gWoonkamer, Colorize)
 
 
@@ -41,7 +41,7 @@ Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) {exec="ON:elro@
 
 
 /* Slaapkamer */
-Dimmer DimmedBedLight "Dimmer [%d %%]" (gSleeping, Lights)
+Dimmer L1 "Dimmer [%d %%]" (gSleeping, Lights)
 
 /* versterker */
 Switch onkyoArtist "Artist: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ARTIST_QUERY"}

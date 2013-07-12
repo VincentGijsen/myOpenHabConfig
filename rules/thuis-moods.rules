@@ -6,36 +6,40 @@ import org.openhab.model.script.actions.*
 var Number moodState = -1
 var Number audioState = -1
 
+var String oldState = null
 
 rule "iphone detect"
 	when 
-		Item netIPhone changed
+		Item netIPhone changed 
+		 
 	then
+	
+	if (oldState == null){
+		oldState = netIPhone.state.toString
+	}
 	if (moodState==-1){
 		moodState =0;
 	}
 	if (audioState==-1){
 		audioState =0;
 	}
+		oldState = netIPhone.state.toString
 	
-	
-	if(netIPhone.state==OFF)
-	{	
-		if(Scene_General.state instanceof DecimalType) moodState = Scene_General.state as DecimalType 	
-		if(Scene_Radio.state instanceof DecimalType) audioState = Scene_Radio.state as DecimalType 	
+		if(netIPhone.state==OFF)
+		{	
+			if(Scene_General.state instanceof DecimalType) moodState = Scene_General.state as DecimalType 	
+			if(Scene_Radio.state instanceof DecimalType) audioState = Scene_Radio.state as DecimalType 	
+			
+			postUpdate(Scene_General, 0)
+			postUpdate(Scene_Radio, 0)
+			logInfo("thuis-moods", "stored light state and powering off")
+		}		
 		
-		postUpdate(Scene_General, 0)
-		postUpdate(Scene_Radio, 0)
-		logInfo("thuis-moods", "stored light state and powering off")
-	}		
-	
-	if (netIPhone.state==ON){
-			postUpdate(Scene_General, moodState)
-			postUpdate(Scene_Radio, audioState)
-			logInfo("thuis-moods", "restoring state to " + moodState)
-	}
-	
-	
+		if (netIPhone.state==ON){
+				postUpdate(Scene_General, moodState)
+				postUpdate(Scene_Radio, audioState)
+				logInfo("thuis-moods", "restoring state to " + moodState)
+		}	
 end
 
 
