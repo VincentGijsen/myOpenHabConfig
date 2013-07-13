@@ -10,7 +10,7 @@ rule "MSP on update"
 	then
 		if(inPackage){
 		    MspUpdate = MspUpdate + Msp.state.toString.trim
-		    println("MSPupdate -> " + MspUpdate)
+		    //println("MSPupdate -> " + MspUpdate)
 		    if (MspUpdate.contains(";")) {
 				if (MspUpdate.contains("temp")) {
 					var int valueStartsOn = MspUpdate.indexOf("=") + "=".length
@@ -32,7 +32,7 @@ rule "MSP on update"
 	    		MspUpdate = MspUpdate + Msp.state.toString.trim
 	    		inPackage= true;
 	    	}
-	    	println("invalid data: " + Msp.state.toString);
+	    	//println("invalid data: " + Msp.state.toString);
 	    	
 	    }
 end
