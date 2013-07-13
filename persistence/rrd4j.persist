@@ -2,9 +2,11 @@
 Strategies {
 	// for rrd, we need a cron strategy
 	everyMinute : "0 * * * * ?"
+	everyHour 	: "0 0 * * * ?"
+	every5minute: "0 0/5 * * * ?"
 }
 
 Items {
 	// let's only store temperature values in rrd
-	Temperature*,Weather_Chart* : strategy = everyMinute
+	Temperature*,Weather_Chart* : strategy = every5minute
 }
