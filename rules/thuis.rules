@@ -47,7 +47,7 @@ rule "RGB Links"
 	println(String::format("Color settings: %d %d %d", hsbType.red.intValue(), hsbType.green.intValue(), 
 			hsbType.blue.intValue()
 	))
-	var cmd = String::format("LAr%c%c%c\n",  r,g,b)
+	var cmd = String::format("LAr%s%s%s\n",  r,g,b)
 	logInfo("RGB links", "cmd: " + cmd)
 	
 	sendCommand(Msp, cmd)
