@@ -8,32 +8,38 @@ rule "MSP on update"
 	when 
 		Item Msp received update
 	then
-		if(inPackage){
+		//Every package starts with [ (this did i determine myserlf :)
+		
+		if(Msp.state.toString.trim.contains("[")){
+	    		MspUpdate = MspUpdate + Msp.state.toString.trim
+	    		inPackage= true;
+	    }
+	    //or if we received only the start of the package, append it to the already known bit
+	    else if(inPackage){
 		    MspUpdate = MspUpdate + Msp.state.toString.trim
-		    //println("MSPupdate -> " + MspUpdate)
-		    if (MspUpdate.contains(";")) {
+		 }
+		 //Okay, we've just recieved garbage/debug (should not occur though
+	    else
+	    {    	
+	    	println("invalid data: " + Msp.state.toString);
+	    }
+		
+		
+		//logic to handle the actual meaning of the package
+		//we delimmit the packages with 3x ;;; to enable us to use non-determined package lenghts (<29byte ofcourse ;))
+		if (MspUpdate.contains(";;;")) {
 				if (MspUpdate.contains("temp")) {
 					var int valueStartsOn = MspUpdate.indexOf("=") + "=".length
 					var String myTemperatureAsString = MspUpdate.mid(valueStartsOn, MspUpdate.indexOf(';')-valueStartsOn)
 					println(myTemperatureAsString);
 					var Number myTemperature = 0.0f
 					myTemperature = Float::parseFloat(myTemperatureAsString)
-					//postUpdate(Temperature_GF_Living, myTemperature)
+					//postUpdate(Temperature_GF_Living, myTemperature)	
 				}
 				if (MspUpdate.contains("]p")){
-					println("Received ping from: " + MspUpdate.substring(1,2));
+					println("Received ping from: " + MspUpdate.substring(1,3));
 				}
 				inPackage=false
 				MspUpdate = ""
-		    }
-	    }
-	    else
-	    {
-	    	if(Msp.state.toString.trim.contains("[")){
-	    		MspUpdate = MspUpdate + Msp.state.toString.trim
-	    		inPackage= true;
-	    	}
-	    	println("invalid data: " + Msp.state.toString);
-	    	
-	    }
+		  }
 end
