@@ -21,8 +21,9 @@ rule "MSP on update"
 					//postUpdate(Temperature_GF_Living, myTemperature)
 				}
 				if (MspUpdate.contains("]p")){
-					println("Received ping from: " + MspUpdate.mid(1,6))
+					println("Received ping from: " + MspUpdate.substring(1,2));
 				}
+				inPackage=false
 				MspUpdate = ""
 		    }
 	    }
@@ -32,7 +33,7 @@ rule "MSP on update"
 	    		MspUpdate = MspUpdate + Msp.state.toString.trim
 	    		inPackage= true;
 	    	}
-	    	//println("invalid data: " + Msp.state.toString);
+	    	println("invalid data: " + Msp.state.toString);
 	    	
 	    }
 end
