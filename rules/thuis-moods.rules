@@ -42,4 +42,24 @@ rule "iphone detect"
 		}	
 end
 
+rule "change mood"
+when	
+	Item Scene_General changed
+then
+	var Number s = -1
+	
+	if(Scene_General.state instanceof DecimalType)  s  = Scene_General.state as DecimalType 
+	
+	if(s == 0) callScript("off.script")
+	if(s == 1) callScript("tv.script")
+	if(s == 2) callScript("diner.script")
+	if(s == 3) callScript("work.script")
+	if(s == 4) callScript("movie.script")
+	if(s == 5) callScript("sleep.script")
+	
+	
+			
+	logInfo("scene change: ", " "+ Scene_General.state)
+
+end
 

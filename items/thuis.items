@@ -41,7 +41,7 @@ Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) {exec="ON:elro@
 
 
 /* Slaapkamer */
-Dimmer L3 "Dimmer [%d %%]" (gSleeping, Lights)
+Dimmer dimmer_bed "Dimmer [%d %%]" (gSleeping, Lights)
 
 /* versterker */
 Switch onkyoArtist "Artist: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ARTIST_QUERY"}

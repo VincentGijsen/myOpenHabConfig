@@ -10,13 +10,13 @@ var float bscalar = (1.27 * 1.0).floatValue()
 
 
 
-rule "L3 Bedlight RGB"
+rule "dimmer_bed Bedlight RGB"
 	when
-		Item L3 received command
+		Item dimmer_bed received command
 	then
 	    var Number percent = 0
 	
-		if(L3.state instanceof DecimalType) percent = L3.state as DecimalType 
+		if(dimmer_bed.state instanceof DecimalType) percent = dimmer_bed.state as DecimalType 
 			
 		if(receivedCommand==INCREASE) percent = percent + 5
 		if(receivedCommand==DECREASE) percent = percent - 5
@@ -31,7 +31,7 @@ rule "L3 Bedlight RGB"
 		val cmd = String::format("L3r%c\n", scale )
 		logInfo("bedlight" , "bedLight send " + cmd)
 		sendCommand(Msp, cmd)
-		postUpdate(L3, percent);
+		postUpdate(LA, percent);
 end
 
 rule "RGB Links"
@@ -43,6 +43,9 @@ rule "RGB Links"
 	var r = String::format("%c", Math::floor( hsbType.red.floatValue * rscalar).intValue())
 	var g = String::format("%c", Math::floor( hsbType.green.floatValue * gscalar).intValue())
 	var b = String::format("%c", Math::floor( hsbType.blue.floatValue * bscalar).intValue())
+	
+	g = String::format("%c", Math::floor( 0))
+	b = String::format("%c", Math::floor( 0))
 	
 	println(String::format("Color settings: %d %d %d", hsbType.red.intValue(), hsbType.green.intValue(), 
 			hsbType.blue.intValue()
