@@ -7,7 +7,7 @@ var Number moodState = -1
 var Number audioState = -1
 
 var String oldState = null
-
+/*
 rule "iphone detect"
 	when 
 		Item netIPhone changed 
@@ -41,7 +41,7 @@ rule "iphone detect"
 				logInfo("thuis-moods", "restoring state to " + moodState)
 		}	
 end
-
+*/
 rule "change mood"
 when	
 	Item Scene_General changed
