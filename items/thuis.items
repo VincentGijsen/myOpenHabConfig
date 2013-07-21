@@ -42,6 +42,7 @@ Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) {exec="ON:elro@
 
 /* Slaapkamer */
 Dimmer dimmer_bed "Dimmer [%d %%]" (gSleeping, Lights)
+Switch sleepTimer "Sleep Timer 10 minutes"		(gSleeping)
 
 /* versterker */
 Switch onkyoArtist "Artist: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ARTIST_QUERY"}

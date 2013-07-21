@@ -8,7 +8,7 @@ gWoonkamer?.members.forEach(light|
 		
 gKeuken?.members.forEach(light | postUpdate(light, OFF))
 
-gSleeping.members.forEach(light| postUpdate(light, 80));
+gSleeping.members.forEach(light| sendCommand(light, 100));
 
 		
 		

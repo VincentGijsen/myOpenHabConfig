@@ -5,7 +5,7 @@ sitemap thuis label="De Hut"
 		}
    
     Frame label="Your Mood" {
-		Switch item=Scene_General label="Scene" mappings=[0=AWAY, 1=TV, 2=Dinner, 3=Work, 4=Movie, 5=Sleep]
+		Switch item=Scene_General label="Scene" mappings=[0=AWAY, 1=Work, 2=Movie, 3=Sleep]
 
 	}
 	

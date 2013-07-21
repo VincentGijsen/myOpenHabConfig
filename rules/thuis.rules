@@ -4,8 +4,8 @@ import org.openhab.model.script.actions.*
 import java.lang.Math.*
 
 //1.27 = 100%, but leds are ~even bright at ~80%
-var float rscalar = (1.27 * 0.8).floatValue()
-var float gscalar = (1.27 * 0.01).floatValue()
+var float rscalar = (1.27 * 1.0).floatValue()
+var float gscalar = (1.27 * 1.0).floatValue()
 var float bscalar = (1.27 * 1.0).floatValue()
 
 
@@ -28,7 +28,7 @@ rule "dimmer_bed Bedlight RGB"
 		
 		//we scale decimally, not hexadicimal!
 		val Number scale = Math::floor( percent.floatValue * 1.27).intValue
-		val cmd = String::format("LQr%c\n", scale )
+		val cmd = String::format("LEDD1r%c\n", scale )
 		logInfo("bedlight" , "bedLight send " + cmd)
 		sendCommand(Msp, cmd)
 		postUpdate(dimmer_bed, percent);
@@ -40,17 +40,14 @@ rule "RGB Links"
 	var HSBType hsbType
 	if (RGB_links.state instanceof HSBType) hsbType = RGB_links.state as HSBType
 	
-	var r = String::format("%c", Math::floor( hsbType.red.floatValue * rscalar).intValue())
-	var g = String::format("%c", Math::floor( hsbType.green.floatValue * gscalar).intValue())
-	var b = String::format("%c", Math::floor( hsbType.blue.floatValue * bscalar).intValue())
-	
-	//g = String::format("%c", Math::floor( 0))
-	//b = String::format("%c", Math::floor( 0))
+	var r = Math::floor( hsbType.red.floatValue * rscalar).intValue()
+	var g = Math::floor( hsbType.green.floatValue * gscalar).intValue()
+	var b = Math::floor( hsbType.blue.floatValue * bscalar).intValue()
 	
 	println(String::format("Color settings: %d %d %d", hsbType.red.intValue(), hsbType.green.intValue(), 
 			hsbType.blue.intValue()
 	))
-	var cmd = String::format("LAr%s%s%s\n",  r,g,b)
+	var cmd = String::format("LEDR1%s%s%sXX\n", r,g,b)
 	logInfo("RGB links", "cmd: " + cmd)
 	
 	sendCommand(Msp, cmd)

@@ -7,3 +7,10 @@ rule "WakeUp alarm "
         dimmer_bed
 end
 */
+
+rule "Sleep Timer settings"
+when Item sleepTimer changed to ON
+then
+	callScript("sleep_timer.script")
+
+end

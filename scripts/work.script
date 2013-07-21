@@ -1,1 +1,8 @@
 logInfo("Work.script", "WorkScript")
+
+
+sendCommand(onkyoSrcFavs, ON);
+
+gKeuken?.members.forEach(light | postUpdate(light, 15))
+gWoonkamer.members.forEach(light | postUpdate(light, 50))
+
