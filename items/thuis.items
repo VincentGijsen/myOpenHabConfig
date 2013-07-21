@@ -28,8 +28,8 @@ String arg1
 
 
 /* Woonkamer */
-Color LA "left color bar" (gWoonkamer, Colorize) 
-Color rightColor "left color bar" (gWoonkamer, Colorize)
+Color RGB_links "left color bar" (gWoonkamer, Colorize) 
+Color RGB_rechts "right color bar" (gWoonkamer, Colorize)
 
 
 Switch Light_hoek       "TV-hoek"           (gWoonkamer, Lights) {exec="ON:elro@@31@@A@@on, OFF:elro@@31@@A@@off"}

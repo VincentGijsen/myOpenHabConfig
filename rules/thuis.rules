@@ -31,14 +31,14 @@ rule "dimmer_bed Bedlight RGB"
 		val cmd = String::format("LQr%c\n", scale )
 		logInfo("bedlight" , "bedLight send " + cmd)
 		sendCommand(Msp, cmd)
-		postUpdate(LA, percent);
+		postUpdate(dimmer_bed, percent);
 end
 
 rule "RGB Links"
-	when Item  LA received command
+	when Item  RGB_links received command
 	then
 	var HSBType hsbType
-	if (LA.state instanceof HSBType) hsbType = LA.state as HSBType
+	if (RGB_links.state instanceof HSBType) hsbType = RGB_links.state as HSBType
 	
 	var r = String::format("%c", Math::floor( hsbType.red.floatValue * rscalar).intValue())
 	var g = String::format("%c", Math::floor( hsbType.green.floatValue * gscalar).intValue())

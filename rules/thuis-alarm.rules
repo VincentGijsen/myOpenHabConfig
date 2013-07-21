@@ -1,7 +1,9 @@
+/*
 rule "WakeUp alarm "
     when 
         Time is midnight or
         Time cron "0 7 * * * ?"
     then
-        callScript("doSomething")
+        dimmer_bed
 end
+*/
