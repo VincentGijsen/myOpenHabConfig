@@ -44,8 +44,8 @@ rule "RGB Links"
 	var g = String::format("%c", Math::floor( hsbType.green.floatValue * gscalar).intValue())
 	var b = String::format("%c", Math::floor( hsbType.blue.floatValue * bscalar).intValue())
 	
-	g = String::format("%c", Math::floor( 0))
-	b = String::format("%c", Math::floor( 0))
+	//g = String::format("%c", Math::floor( 0))
+	//b = String::format("%c", Math::floor( 0))
 	
 	println(String::format("Color settings: %d %d %d", hsbType.red.intValue(), hsbType.green.intValue(), 
 			hsbType.blue.intValue()
