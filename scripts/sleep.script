@@ -1,0 +1,14 @@
+logInfo("sleep.script", "SleepScript")
+//Switch stuff off in living
+
+
+gWoonkamer?.members.forEach(light|
+			postUpdate(light, OFF)
+		)
+		
+gKeuken?.members.forEach(light | postUpdate(light, OFF))
+
+gSleeping.members.forEach(light| postUpdate(light, 80));
+
+		
+		

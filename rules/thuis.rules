@@ -28,7 +28,7 @@ rule "dimmer_bed Bedlight RGB"
 		
 		//we scale decimally, not hexadicimal!
 		val Number scale = Math::floor( percent.floatValue * 1.27).intValue
-		val cmd = String::format("L3r%c\n", scale )
+		val cmd = String::format("LQr%c\n", scale )
 		logInfo("bedlight" , "bedLight send " + cmd)
 		sendCommand(Msp, cmd)
 		postUpdate(LA, percent);
