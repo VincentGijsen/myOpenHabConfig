@@ -1,0 +1,26 @@
+
+/*
+ * This script kills the lights in the bedroom in 10 minutes, step wise
+
+ */
+var baseFuture = 2
+println("Executed timers")
+		
+createTimer(now.plusMinutes(baseFuture).plusSeconds(-60)) [|
+    gSleeping.members.forEach(light| sendCommand(light, 80));
+]
+createTimer(now.plusMinutes(baseFuture).plusSeconds(-50)) [|
+    gSleeping.members.forEach(light| sendCommand(light, 60));
+]
+	createTimer(now.plusMinutes(baseFuture).plusSeconds(-40)) [|
+    gSleeping.members.forEach(light| sendCommand(light, 60));
+]
+createTimer(now.plusMinutes(baseFuture).plusSeconds(-20)) [|
+    gSleeping.members.forEach(light| sendCommand(light, 40));
+]
+createTimer(now.plusMinutes(baseFuture).plusSeconds(-10)) [|
+    gSleeping.members.forEach(light| sendCommand(light, 20));
+]
+createTimer(now.plusMinutes(baseFuture).plusSeconds(0)) [|
+    gSleeping.members.forEach(light| sendCommand(light, OFF));
+]
