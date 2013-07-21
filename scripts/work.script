@@ -1,8 +1,10 @@
 logInfo("Work.script", "WorkScript")
 
 
-sendCommand(onkyoSrcFavs, ON);
-
 gKeuken?.members.forEach(light | postUpdate(light, 15))
 gWoonkamer.members.forEach(light | postUpdate(light, 50))
 
+sendCommand(onkyoPower, ON)
+sendCommand(onkyoVolume, 10)
+sendCommand(onkyoInternetRadio, ON)
+sendCommand(onkyoButon2Net, ON)

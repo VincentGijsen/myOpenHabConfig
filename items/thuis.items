@@ -45,19 +45,21 @@ Dimmer dimmer_bed "Dimmer [%d %%]" (gSleeping, Lights)
 Switch sleepTimer "Sleep Timer 10 minutes"		(gSleeping)
 
 /* versterker */
-Switch onkyoArtist "Artist: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ARTIST_QUERY"}
-String onkyoAlbum "Album: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_ALBUM_QUERY"}
-String onkyoTitle "Title: [%s]" 		(gRadio) {onkyo="ON:hometheater:NETUSB_SONG_TITLE_QUERY"}
-String onkyoStatus "Status: [%s]"		(gRadio) {onkyo="ON:hometheater:NETUSB_PLAY_STATUS_QUERY"}
 
 Switch onkyoPower 	"Power"				(gRadio) {onkyo="ON:hometheater:POWER_ON, OFF:hometheater:POWER_OFF"} 
 Dimmer onkyoVolume 	"Volume"			(gRadio) {onkyo="INCREASE:hometheater:VOLUME_UP, DECREASE:hometheater:VOLUME_DOWN"}
-Switch onkyoSrcNas  "Src: Nas"			(gRadio) {onkyo="ON:hometheater:SOURCE_MUSICSERVER"}
-Switch onkyoSrcFavs "SRC Favs" 			(gRadio) {onkyo="ON:hometheater:SOURCE_INTERETRADIO"}
-Switch onkyoSrcNet "SRC UP"			(gRadio) {onkyo="ON:hometheater:SOURCE_UP"}
+Switch onkyoSrcDVR  "Src: DRV"			(gRadio) {onkyo="ON:hometheater:SOURCE_DVR"}
+Switch onkyoSrcSAT "SRC sat" 			(gRadio) {onkyo="ON:hometheater:SOURCE_SATELLITE"}
+Switch onkyoSrcGAme "SRC GAME"			(gRadio) {onkyo="ON:hometheater:SOURCE_GAME"}
 Switch onkyoSrcAux  "Src Aux" 			(gRadio) {onkyo="ON:hometheater:SOURCE_AUX"}
+Switch onkyoMusicServer "SOURCE_MUSICS" (gRadio) {onkyo="ON:hometheater:SOURCE_MUSICSERVER"}
+Switch onkyoInternetRadio "SOURCinetrad" (gRadio) {onkyo="ON:hometheater:SOURCE_INTERETRADIO"}
+Switch onkyoSOURCE_NETWORK "network" (gRadio) {onkyo="ON:hometheater:SOURCE_NETWORK"}
 Switch onkyoSrcAppleTv "SRC AppleTv" 	(gRadio) {onkyo="ON:hometheater:SOURCE_COMPUTER"}
 Switch onkyoSrcSirius "SRC Sirius" 	(gRadio) {onkyo="ON:hometheater:NETUSB_OP_TOPMENU"}
+Switch onkyoPlayNet "NetPlayBut"	(gRadio) {onkyo="ON:hometheater:NETUSB_OP_PLAY"}
+Switch onkyoButon2Net "netButton2"  (gradio) {onkyo="ON:hometheater:NETUSB_OP_2"}
+
 
 /*
  * General stuff
