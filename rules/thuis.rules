@@ -37,8 +37,12 @@ end
 rule "Hallogeen Tv"
 	when Item  Light_hoek received command
 	then
-	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cA%c\n", 31,1))
-	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cA%c\n", 31,0))
+	val Number systemcode = 31
+	val Number on = 1
+	val Number off = 0
+	
+	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cA%c\n", systemcode, on))
+	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cA%c\n", systemcode ,off))
 	
 end
 

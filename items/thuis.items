@@ -32,12 +32,12 @@ Color RGB_links "left color bar" (gWoonkamer, Colorize)
 Color RGB_rechts "right color bar" (gWoonkamer, Colorize)
 
 
-Switch Light_hoek       "TV-hoek"           (gWoonkamer, Lights) {exec="ON:elro@@31@@A@@on, OFF:elro@@31@@A@@off"}
-Switch Light_kast       "Kastje"            (gWoonkamer, Lights) {exec="ON:elro@@31@@B@@on, OFF:elro@@31@@B@@off"}
-Switch Light_tafel      "Tafel"             (gWoonkamer, Lights) {exec="ON:elro@@31@@C@@on, OFF:elro@@31@@C@@off"}
+Switch Light_hoek       "TV-hoek"           (gWoonkamer, Lights) 
+Switch Light_kast       "Kastje"            (gWoonkamer, Lights) 
+Switch Light_tafel      "Tafel"             (gWoonkamer, Lights) 
 
 /*Keuken */
-Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) {exec="ON:elro@@31@@A@@on, OFF:elro@@31@@A@@off"}
+Switch Light_kitchen       "Spotjes"           (gKeuken, Lights) 
 
 
 /* Slaapkamer */
