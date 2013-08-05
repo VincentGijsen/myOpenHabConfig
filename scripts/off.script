@@ -2,3 +2,6 @@ logInfo("Off.script", "offScript")
 
 
 Lights.members.forEach( member| postUpdate(member, OFF))		
+
+		
+postUpdate(Scene_General, 0)

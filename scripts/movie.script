@@ -2,10 +2,12 @@ logInfo("movie.script", "movie script")
 
 		
 gKeuken?.members.forEach(light | postUpdate(light, OFF))
-gWoonkamer.members.forEach(light | postUpdate(light, 50))
+gWoonkamer.members.forEach(light | postUpdate(light, ON))
 
 
 gSleeping.members.forEach(light| sendCommand(light, OFF));
 
 //sendCommand(onkyoPower, ON);
 //sendCommand(onkyoSrcAux, ON);
+		
+postUpdate(Scene_General, 2)

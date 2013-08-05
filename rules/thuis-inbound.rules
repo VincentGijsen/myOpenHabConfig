@@ -25,6 +25,12 @@ rule "MSP on update"
 						if(state.equals("1")) callScript("sleep");
 						
 					} 
+					if(channel.equals("C"))
+					{
+						if(state.equals("0")) callScript("away");
+						if(state.equals("1")) callScript("movie");
+						
+					} 
 				}
 				else if (MspUpdate.substring(0,1).equals("c")){
 					println("received Temperature: " + MspUpdate)

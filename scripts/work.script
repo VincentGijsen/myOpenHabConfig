@@ -8,3 +8,5 @@ postUpdate(onkyoPower, ON)
 postUpdate(onkyoVolume, 10)
 postUpdate(onkyoInternetRadio, ON)
 postUpdate(onkyoButon2Net, ON)
+
+postUpdate(Scene_General, 0)
