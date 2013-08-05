@@ -27,7 +27,7 @@ rule "MSP on update"
 					} 
 					if(channel.equals("C"))
 					{
-						if(state.equals("0")) callScript("away");
+						if(state.equals("0")) callScript("off");
 						if(state.equals("1")) callScript("movie");
 						
 					} 
