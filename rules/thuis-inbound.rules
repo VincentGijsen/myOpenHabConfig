@@ -34,10 +34,23 @@ rule "MSP on update"
 				}
 				else if (MspUpdate.substring(0,1).equals("c")){
 					println("received Temperature: " + MspUpdate)
+					var Number temp = 0.0f
+					if(MspUpdate.substring(2,3).equals("3")){
+						temp = Integer::parseInt(MspUpdate.substring(5,6)) * 10;
+						temp = temp + Integer::parseInt(MspUpdate.substring(6,7));
+						//the .value
+						temp = temp + Integer::parseInt(MspUpdate.substring(7,8))/10;
+						postUpdate(Weather_Balcon, temp);	
+					}
+					else
+					{
+						println("unconfigured sensor...");
+					}
+					
 				}
 				else
 				{
-					println("unknown package: " + MspUpdate);
+					println("unknown data: " + MspUpdate);
 				}
 				MspUpdate = ""
 				
