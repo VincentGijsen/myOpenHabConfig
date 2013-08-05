@@ -9,6 +9,10 @@ var float gscalar = (1.27 * 1.0).floatValue()
 var float bscalar = (1.27 * 1.0).floatValue()
 
 
+val Number systemcode = 31
+val Number on = 1
+val Number off = 0
+
 
 rule "dimmer_bed Bedlight RGB"
 	when
@@ -37,12 +41,9 @@ end
 rule "Hallogeen Tv"
 	when Item  Light_hoek received command
 	then
-	val Number systemcode = 31
-	val Number on = 1
-	val Number off = 0
 	
-	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cA%c\n", systemcode, on))
-	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cA%c\n", systemcode ,off))
+	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cA%c\n", systemcode.intValue, on.intValue))
+	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cA%c\n", systemcode.intValue ,off.intValue))
 	
 end
 

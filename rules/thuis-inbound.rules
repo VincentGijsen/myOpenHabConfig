@@ -21,14 +21,14 @@ rule "MSP on update"
 					
 					if(channel.equals("D"))
 					{
-						if(state.equals("0")) callScript("work");
-						if(state.equals("1")) callScript("sleep");
+						if(state.equals("0")) callScript("off");
+						if(state.equals("1")) callScript("movie");
 						
 					} 
 					if(channel.equals("C"))
 					{
-						if(state.equals("0")) callScript("off");
-						if(state.equals("1")) callScript("movie");
+						if(state.equals("0")) callScript("work");
+						if(state.equals("1")) callScript("off");
 						
 					} 
 				}
