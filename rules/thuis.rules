@@ -42,10 +42,3 @@ rule "Hallogeen Tv"
 	
 end
 
-
-rule "LAMP Tvhoek"
-	when Item  Light_hoek received command
-	then
-	
-	sendCommand(Msp, "t\n")
-end

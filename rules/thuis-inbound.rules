@@ -10,7 +10,7 @@ rule "MSP on update"
 	then
 		//Every package starts with [ (this did i determine myserlf :)
 		
-		if(Msp.state.toString.trim.contains("[")){
+		if(Msp.state.toString.trim.notBlank){
 	    		MspUpdate = MspUpdate + Msp.state.toString.trim
 	    		inPackage= true;
 	    }
@@ -27,7 +27,7 @@ rule "MSP on update"
 		
 		//logic to handle the actual meaning of the package
 		//we delimmit the packages with 3x ;;; to enable us to use non-determined package lenghts (<29byte ofcourse ;))
-		if (MspUpdate.contains(";;;")) {
+		if (MspUpdate.contains("\n")) {
 				if (MspUpdate.contains("temp")) {
 					var int valueStartsOn = MspUpdate.indexOf("=") + "=".length
 					var String myTemperatureAsString = MspUpdate.mid(valueStartsOn, MspUpdate.indexOf(';')-valueStartsOn)
