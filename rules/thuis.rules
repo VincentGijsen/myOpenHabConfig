@@ -34,21 +34,18 @@ rule "dimmer_bed Bedlight RGB"
 		postUpdate(dimmer_bed, percent);
 end
 
-rule "RGB Links"
-	when Item  RGB_links received command
+rule "Hallogeen Tv"
+	when Item  Light_hoek received command
 	then
-	var HSBType hsbType
-	if (RGB_links.state instanceof HSBType) hsbType = RGB_links.state as HSBType
+	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cA%c\n", 31,1))
+	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cA0%c\n", 31,0))
 	
-	var r = Math::floor( hsbType.red.floatValue * rscalar).intValue()
-	var g = Math::floor( hsbType.green.floatValue * gscalar).intValue()
-	var b = Math::floor( hsbType.blue.floatValue * bscalar).intValue()
+end
+
+
+rule "LAMP Tvhoek"
+	when Item  Light_hoek received command
+	then
 	
-	println(String::format("Color settings: %d %d %d", hsbType.red.intValue(), hsbType.green.intValue(), 
-			hsbType.blue.intValue()
-	))
-	var cmd = String::format("LEDR1%s%s%sXX\n", r,g,b)
-	logInfo("RGB links", "cmd: " + cmd)
-	
-	sendCommand(Msp, cmd)
+	sendCommand(Msp, "t\n")
 end
