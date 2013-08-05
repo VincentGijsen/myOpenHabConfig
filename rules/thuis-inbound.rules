@@ -16,6 +16,15 @@ rule "MSP on update"
 
 				if (MspUpdate.substring(0,1).equals("r")) {
 					println("Received remote command: " + MspUpdate)
+					val channel = MspUpdate.substring(1,2)
+					val state = MspUpdate.substring(2,3)
+					
+					if(channel.equals("D"))
+					{
+						if(state.equals("0")) callScript("work");
+						if(state.equals("1")) callScript("sleep");
+						
+					} 
 				}
 				else if (MspUpdate.substring(0,1).equals("c")){
 					println("received Temperature: " + MspUpdate)
