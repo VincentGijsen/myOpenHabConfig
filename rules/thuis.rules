@@ -38,7 +38,7 @@ rule "Hallogeen Tv"
 	when Item  Light_hoek received command
 	then
 	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cA%c\n", 31,1))
-	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cA0%c\n", 31,0))
+	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cA%c\n", 31,0))
 	
 end
 
