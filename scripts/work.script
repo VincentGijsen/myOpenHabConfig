@@ -1,8 +1,15 @@
 logInfo("Work.script", "WorkScript")
 
 
-gKeuken?.members.forEach(light | postUpdate(light, 15))
-gWoonkamer.members.forEach(light | postUpdate(light, 50))
+gKeuken?.members.forEach(light | postUpdate(light, OFF))
+
+
+postUpdate(RGB_links, 50)
+postUpdate(RGB_rechts, 50)
+
+postUpdate(Light_hoek, OFF)
+postUpdate(Light_bureau, ON)
+postUpdate(Light_kast, OFF)
 
 postUpdate(onkyoPower, ON)
 postUpdate(onkyoVolume, 10)

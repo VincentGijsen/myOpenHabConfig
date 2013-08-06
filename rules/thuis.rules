@@ -47,3 +47,19 @@ rule "Hallogeen Tv"
 	
 end
 
+rule "Bureau Lamp"
+	when Item  Light_bureau received command
+	then	
+	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cB%c\n", systemcode.intValue, on.intValue))
+	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cB%c\n", systemcode.intValue ,off.intValue))
+	
+end
+
+rule "Kast Lamp"
+	when Item  Light_kast received command
+	then	
+	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cC%c\n", systemcode.intValue, on.intValue))
+	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cC%c\n", systemcode.intValue ,off.intValue))
+	
+end
+

@@ -34,7 +34,7 @@ Color RGB_rechts "right color bar" 			(gWoonkamer, Colorize)
 
 Switch Light_hoek       "TV-hoek"           (gWoonkamer, Lights) 
 Switch Light_kast       "Kastje"            (gWoonkamer, Lights) 
-Switch Light_tafel      "Tafel"             (gWoonkamer, Lights) 
+Switch Light_bureau      "Bureau Hallogeen" (gWork, Lights) 
 
 /*Keuken */
 Switch Light_kitchen       "Spotjes"        (gKeuken, Lights) 
