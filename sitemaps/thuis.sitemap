@@ -20,9 +20,13 @@ sitemap thuis label="De Hut"
 				Text item=Weather_Balcon
 				Text item=Weather_Temp_Max
 				Text item=Weather_Temp_Min
+				Text item=Weather_Temp_Tomorrow
+				Text item=Weather_Temp_DayAfterTomorrow  
 			}
-			Frame {
-				Chart item=Weather_Chart period=2d refresh=10000
+			Frame label="Charts:"{
+				Chart item=Weather_Chart period=1h refresh=1000 label="last hour"
+				Chart item=Weather_Chart period=2d refresh=10000 label="last 2 days"
+				Chart item=Weather_Chart period=7d refresh=10000 label="last week"
 			}
 		}
 	}
