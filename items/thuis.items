@@ -31,8 +31,9 @@ String arg1
 //Color RGB_links "left color bar" 			(gWoonkamer, Colorize)
 //Color RGB_rechts "right color bar" 			(gWoonkamer, Colorize)
 
-Dimmer Kast_led "Light on white kast"		(gWoonkamer, Lights)
-
+Dimmer Kast_led 		"Strip 1 [%d %%]"		(gWoonkamer, Lights)
+Dimmer Muur_strip 		"Strip 2 [%d %%]"		(gWoonkamer, Lights)
+Dimmer Achter_strip 	"Strip 3 [%d %%]"		(gWoonkamer, Lights)
 
 Switch Light_hoek       "TV-hoek"           (gWoonkamer, Lights) 
 Switch Light_kast       "Kastje"            (gWoonkamer, Lights) 
