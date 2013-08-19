@@ -39,10 +39,10 @@ rule "MSP on update"
 					if (MspUpdate.substring(1,MspUpdate.length()).equals("a4300098")){
 						callScript("off");
 					}
-					if (MspUpdate.substring(1,MspUpdate.length()).equals("a4300099")){
+					if (MspUpdate.substring(1,MspUpdate.length()).equals("a4300100")){
 						callScript("work");
 					}
-					if (MspUpdate.substring(1,MspUpdate.length()).equals("a43000100")){
+					if (MspUpdate.substring(1,MspUpdate.length()).equals("a43000104")){
 						callScript("SleepTimer");
 					}
 				}

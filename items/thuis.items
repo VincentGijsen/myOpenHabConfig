@@ -85,12 +85,13 @@ Number 		NoOfPairedDevices "Paired devices in range: [%d]"  (gBluetooth , Blueto
  * WEER MEUK
  */
 
-Group Weather_Chart														          (Weather)
-Group Weather_Forecast															  (Forecast)
+Group Weather_Chart						"Weather current"				          (Weather)
+Group Weather_Forecast					"Weather forecast"						  (Forecast)
+
 Number Weather_Temperature 				"Weather Outside [%.1f °C]"	<temperature> (Weather_Chart, Weather) { http="<[http://weather.yahooapis.com/forecastrss?w=15004979&u=c:300000:XSLT(weather-now.xsl)]" }
-Number Weather_Balcon					"Weather Balkon  [%.1f °C]" <temperature> (Weater_Chart)
-Number Weather_Temp_Max 				"Today's Maximum [%.1f °C]"	<temperature> (Weather_Chart)
-Number Weather_Temp_Min 				"Today's Minimum [%.1f °C]"	<temperature> (Weather_Chart)
+Number Weather_Balcon					"Weather Balkon  [%.1f °C]" <temperature> (Weater_Chart, Weather)
+Number Weather_Temp_Max 				"Today's Maximum [%.1f °C]"	<temperature> (Weather_Chart, Weather)
+Number Weather_Temp_Min 				"Today's Minimum [%.1f °C]"	<temperature> (Weather_Chart, Weather)
 
 Number Weather_Temp_Tomorrow 			"Tomorrow  [%.1f °C]" <temperature> 		 (forecast)	{ http="<[http://weather.yahooapis.com/forecastrss?w=15004979&u=c:18000000:XSLT(weather-tomorrow.xsl)]" }
 Number Weather_Temp_DayAfterTomorrow 	"Day After Tomorrow [%.1f °C]" <temperature> (forecast)	{ http="<[http://weather.yahooapis.com/forecastrss?w=15004979&u=c:18000000:XSLT(weather-dayaftertomorrow.xsl)]" }
