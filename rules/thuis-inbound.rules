@@ -37,25 +37,25 @@ rule "MSP on update"
 				}
 				else if(MspUpdate.substring(0,1).equals("a")){
 					//big remote
-					if (MspUpdate.substring(1,MspUpdate.length()).equals("a1511")){
+					if (MspUpdate.substring(0,MspUpdate.length()).equals("a1511")){
 						callScript("movie");
 					}
-					if (MspUpdate.substring(1,MspUpdate.length()).equals("a1514")){
+					if (MspUpdate.substring(0,MspUpdate.length()).equals("a1514")){
 						callScript("off");
 					}
 					
 					
 					//tiny remote
-					if (MspUpdate.substring(1,MspUpdate.length()).equals("a419D41")){
+					if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D41")){
 						callScript("movie");
 					}
-					if (MspUpdate.substring(1,MspUpdate.length()).equals("a419D42")){
+					if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D42")){
 						callScript("off");
 					}
-					if (MspUpdate.substring(1,MspUpdate.length()).equals("a419D44")){
+					if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D44")){
 						callScript("work");
 					}
-					if (MspUpdate.substring(1,MspUpdate.length()).equals("a419D48")){
+					if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D48")){
 						callScript("SleepTimer");
 					}
 				}
