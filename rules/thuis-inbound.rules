@@ -32,6 +32,21 @@ rule "MSP on update"
 						
 					} 
 				}
+				if(MspUpdate.substring(0,1).equals("a")){
+					if (MspUpdate.substring(1,MspUpdate.length()).equals("a4300097")){
+						callScript("movie");
+					}
+					if (MspUpdate.substring(1,MspUpdate.length()).equals("a4300098")){
+						callScript("off");
+					}
+					if (MspUpdate.substring(1,MspUpdate.length()).equals("a4300099")){
+						callScript("work");
+					}
+					if (MspUpdate.substring(1,MspUpdate.length()).equals("a43000100")){
+						callScript("SleepTimer");
+					}
+				}
+				
 				else if (MspUpdate.substring(0,1).equals("c")){
 					println("received Temperature: " + MspUpdate)
 					var Number temp = 0.0f
