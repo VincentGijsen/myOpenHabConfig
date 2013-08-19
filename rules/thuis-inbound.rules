@@ -32,7 +32,7 @@ rule "MSP on update"
 						
 					} 
 				}
-				if(MspUpdate.substring(0,1).equals("a")){
+				else if(MspUpdate.substring(0,1).equals("a")){
 					if (MspUpdate.substring(1,MspUpdate.length()).equals("a4300097")){
 						callScript("movie");
 					}
