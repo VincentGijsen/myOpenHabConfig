@@ -28,13 +28,15 @@ String arg1
 
 
 /* Woonkamer */
-Color RGB_links "left color bar" 			(gWoonkamer, Colorize)
-Color RGB_rechts "right color bar" 			(gWoonkamer, Colorize)
+//Color RGB_links "left color bar" 			(gWoonkamer, Colorize)
+//Color RGB_rechts "right color bar" 			(gWoonkamer, Colorize)
+
+Dimmer Kast_led "Light on white kast"		(gWoonkamer, Lights)
 
 
 Switch Light_hoek       "TV-hoek"           (gWoonkamer, Lights) 
 Switch Light_kast       "Kastje"            (gWoonkamer, Lights) 
-Switch Light_bureau      "Bureau Hallogeen" (gWork, Lights) 
+Switch Light_bureau      "Bureau Hallogeen" (gWoonkamer, Lights) 
 
 /*Keuken */
 Switch Light_kitchen       "Spotjes"        (gKeuken, Lights) 

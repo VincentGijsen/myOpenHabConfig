@@ -38,6 +38,33 @@ rule "dimmer_bed Bedlight RGB"
 		postUpdate(dimmer_bed, percent);
 end
 
+rule "Ledstrip met Adres1, 1byte kleuren"
+	when
+		Item Kast_led received command
+	then
+	    var Number percent = 0
+	
+		if(Kast_led.state instanceof DecimalType) percent = Kast_led.state as DecimalType 
+			
+		if(receivedCommand==INCREASE) percent = percent + 5
+		if(receivedCommand==DECREASE) percent = percent - 5
+		if(receivedCommand==OFF) percent = 0
+		
+		if(percent<0)   percent = 0
+		if(percent>100) percent = 100
+		
+		
+		//we scale decimally, not hexadicimal!
+		val Number scale = Math::floor( percent.floatValue * 1.27).intValue
+		val cmd = String::format("l%c%cxx\n", 0x01, scale )
+		logInfo("KastLight" , "got: " + cmd)
+		sendCommand(Msp, cmd)
+		postUpdate(dimmer_bed, percent);
+end
+
+
+
+
 rule "Hallogeen Tv"
 	when Item  Light_hoek received command
 	then
