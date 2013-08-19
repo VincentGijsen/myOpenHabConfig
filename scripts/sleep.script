@@ -3,10 +3,10 @@ logInfo("sleep.script", "SleepScript")
 
 
 gWoonkamer?.members.forEach(light|
-			postUpdate(light, OFF)
+			sendCommand(light, OFF)
 		)
 		
-gKeuken?.members.forEach(light | postUpdate(light, OFF))
+gKeuken?.members.forEach(light | sendCommand(light, OFF))
 
 gSleeping.members.forEach(light| sendCommand(light, 100));
 

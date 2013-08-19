@@ -1,8 +1,8 @@
 logInfo("movie.script", "movie script")
 
 		
-gKeuken?.members.forEach(light | postUpdate(light, OFF))
-gWoonkamer.members.forEach(light | postUpdate(light, ON))
+gKeuken?.members.forEach(light | sendCommand(light, OFF))
+//gWoonkamer.members.forEach(light | sendCommand(light, ON))
 
 
 gSleeping.members.forEach(light| sendCommand(light, OFF));
