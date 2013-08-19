@@ -13,6 +13,7 @@ rule "MSP on update"
 		if(Msp.state.toString.trim.notBlank){
 	    		MspUpdate = MspUpdate + Msp.state.toString.trim
 	    		inPackage= true;
+	    		if(!(MspUpdate.contains('\n'))) return;
 
 				if (MspUpdate.substring(0,1).equals("r")) {
 					println("Received remote command: " + MspUpdate)
