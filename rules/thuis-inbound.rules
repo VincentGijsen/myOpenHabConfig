@@ -11,7 +11,7 @@ rule "MSP on update"
 		//Every package starts with [ (this did i determine myserlf :)
 		
 		if(Msp.state.toString.trim.notBlank){
-	    		MspUpdate = MspUpdate + Msp.state.toString.trim
+	    		MspUpdate = MspUpdate + Msp.state.toString
 	    		inPackage= true;
 	    		if(!(MspUpdate.contains('\n'))) return;
 
