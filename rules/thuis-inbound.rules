@@ -1,19 +1,14 @@
 	
 var String MspUpdate = ""
 
-var Boolean inPackage = false
-
-
 rule "MSP on update"
 	when 
 		Item Msp received update
 	then
-		//Every package starts with [ (this did i determine myserlf :)
-		
 		if(Msp.state.toString.trim.notBlank){
-	    		MspUpdate = MspUpdate + Msp.state.toString
+	    		MspUpdate = MspUpdate + Msp.state.toString.trim()
 	    		//String complete, :) going to process.
-	    		if(MspUpdate.contains("\n")){
+	    		if(MspUpdate.endsWith(";;;")){
 					//remove line-ending prior to next step
 					MspUpdate = MspUpdate.trim;
 					val typeCmd = MspUpdate.substring(0,1);
@@ -38,25 +33,25 @@ rule "MSP on update"
 					//remote with AlarmLib
 					else if(typeCmd.equals("a")){
 						//big remote
-						if (MspUpdate.substring(0,MspUpdate.length()).equals("a1511")){
+						if (MspUpdate.startsWith("a1511")){
 							callScript("movie");
 						}
-						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a1514")){
+						else if (MspUpdate.startsWith("a1514")){
 							callScript("off");
 						}
 						
 						
 						//tiny remote
-						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D41")){
+						else if (MspUpdate.startsWith("a419D41")){
 							callScript("movie");
 						}
-						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D42")){
+						else if (MspUpdate.startsWith("a419D42")){
 							callScript("off");
 						}
-						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D44")){
+						else if (MspUpdate.startsWith("a419D44")){
 							callScript("work");
 						}
-						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D48")){
+						else if (MspUpdate.startsWith("a419D48")){
 							callScript("SleepTimer");
 						}
 						else{
