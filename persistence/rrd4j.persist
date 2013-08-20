@@ -3,6 +3,7 @@ Strategies {
 	everyHour 	: "0 0 * * * ?"
 	everyDay 	: "0 0 0 * * ?"
 	every5minute: "0 0/5 * * * ?"
+	everyMinute : "0 * * * * ?"
 	// if no strategy is specified for an item entry below, the default list will be used
 	default = everyHour
 }
@@ -17,7 +18,7 @@ Items {
 	// careful, this might result in huge databases - that's why it is in comment here ;-)
 	// * : strategy = everyChange, everyDay, restoreOnStartup
 	 // persist all items once a day and on every change and restore them from the db at startup
-    * : strategy = everyChange, everyDay, restoreOnStartup
+    * : strategy = everyChange, everyMinute, restoreOnStartup
 	// persist all temperature and weather values at every change and every hour
-	Temperature*, Weather* : strategy = everyChange, everyHour
+	Temperature*, Weather* : strategy = everyChange, everyMinute
 }
