@@ -4,13 +4,13 @@ logInfo("Work.script", "WorkScript")
 gKeuken?.members.forEach(light | postUpdate(light, OFF))
 
 
-postUpdate(Light_hoek, OFF)
-postUpdate(Light_bureau, ON)
-postUpdate(Light_kast, OFF)
+sendCommand(Light_hoek, OFF)
+sendCommand(Light_bureau, ON)
+sendCommand(Light_kast, OFF)
 
 postUpdate(onkyoPower, ON)
 postUpdate(onkyoVolume, 10)
 postUpdate(onkyoInternetRadio, ON)
 postUpdate(onkyoButon2Net, ON)
 
-postUpdate(Scene_General, 1)
+//postUpdate(Scene_General, 1)

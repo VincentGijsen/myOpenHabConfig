@@ -11,4 +11,4 @@ gKeuken?.members.forEach(light | sendCommand(light, OFF))
 gSleeping.members.forEach(light| sendCommand(light, 100));
 
 		
-postUpdate(Scene_General, 3)
+//postUpdate(Scene_General, 3)

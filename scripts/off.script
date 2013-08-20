@@ -3,5 +3,3 @@ logInfo("Off.script", "offScript")
 
 Lights.members.forEach( member| sendCommand(member, OFF))		
 
-		
-postUpdate(Scene_General, 0)
