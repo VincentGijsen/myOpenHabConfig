@@ -7,7 +7,7 @@ rule "MSP on update"
 		Item Msp received update
 	then
 		if(Msp.state.toString.trim.notBlank){
-	    		if(MspUpdate.toString.trim.startsWith("|||")){
+	    		if(Msp.state.toString.trim.startsWith("|||")){
 	    			inPackage = true;
 	    		}
 	    		//only add data if it starte correct!
@@ -18,7 +18,7 @@ rule "MSP on update"
 	    		
 	    		
 	    		if(inPackage && MspUpdate.endsWith(";;;")){
-					val typeCmd = MspUpdate.substring(0,1);
+					val typeCmd = MspUpdate.substring(3,4);
 					if (typeCmd.equals("r")) {
 						println("Received remote command: " + MspUpdate)
 						val channel = MspUpdate.substring(1,2)
@@ -40,25 +40,25 @@ rule "MSP on update"
 					//remote with AlarmLib
 					else if(typeCmd.equals("a")){
 						//big remote
-						if (MspUpdate.startsWith("a1511")){
+						if (MspUpdate.contains("a1511")){
 							callScript("movie");
 						}
-						else if (MspUpdate.startsWith("a1514")){
+						else if (MspUpdate.contains("a1514")){
 							callScript("off");
 						}
 						
 						
 						//tiny remote
-						else if (MspUpdate.startsWith("a419D41")){
+						else if (MspUpdate.contains("a419D41")){
 							callScript("movie");
 						}
-						else if (MspUpdate.startsWith("a419D42")){
+						else if (MspUpdate.contains("a419D42")){
 							callScript("off");
 						}
-						else if (MspUpdate.startsWith("a419D44")){
+						else if (MspUpdate.contains("a419D44")){
 							callScript("work");
 						}
-						else if (MspUpdate.startsWith("a419D48")){
+						else if (MspUpdate.contains("a419D48")){
 							callScript("SleepTimer");
 						}
 						else{
@@ -68,11 +68,11 @@ rule "MSP on update"
 					else if (typeCmd.equals("c")){
 						println("received Temperature: " + MspUpdate)
 						var Number temp = 0.0f
-						if(MspUpdate.substring(2,3).equals("3")){
-							temp = Integer::parseInt(MspUpdate.substring(5,6)) * 10;
-							temp = temp + Integer::parseInt(MspUpdate.substring(6,7));
+						if(MspUpdate.substring(5,6).equals("3")){
+							temp = Integer::parseInt(MspUpdate.substring(8,9)) * 10;
+							temp = temp + Integer::parseInt(MspUpdate.substring(9,10));
 							//the .value
-							temp = temp + (Integer::parseInt(MspUpdate.substring(7,8)) * 0.1);
+							temp = temp + (Integer::parseInt(MspUpdate.substring(10,11)) * 0.1);
 							postUpdate(Weather_Temp_Balcony, temp);	
 						}
 						else
