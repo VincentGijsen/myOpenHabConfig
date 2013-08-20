@@ -58,7 +58,7 @@ rule "Ledstrip met Adres1, 1byte kleuren"
 		val cmd = String::format("l%c%cxx\n", 0x01, scale )
 		//logInfo("KastLight" , "got: " + cmd)
 		postUpdate(Msp, cmd)
-		postUpdate(dimmer_bed, percent);
+		postUpdate(Kast_led, percent);
 end
 
 
