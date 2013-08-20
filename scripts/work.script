@@ -18,4 +18,4 @@ postUpdate(onkyoInternetRadio, ON)
 postUpdate(onkyoButon2Net, ON)
 
 //postUpdate(Scene_General, 1)
-if (!Scene_General.state.equals(1)) postUpdate(Scene_General, 1);
+//if (!Scene_General.state.equals(1)) postUpdate(Scene_General, 1);

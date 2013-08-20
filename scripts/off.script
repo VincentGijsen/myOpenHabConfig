@@ -3,4 +3,4 @@ logInfo("Off.script", "offScript")
 
 Lights.members.forEach( member| sendCommand(member, OFF))		
 
-if (!Scene_General.state.equals(0)) postUpdate(Scene_General, 0);
+//if (!Scene_General.state.equals(0)) postUpdate(Scene_General, 0);

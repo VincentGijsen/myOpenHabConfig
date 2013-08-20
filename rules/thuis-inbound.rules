@@ -27,6 +27,7 @@ rule "MSP on update"
 	    		if(inPackage && MspUpdate.endsWith(";;;")){
 					val typeCmd = MspUpdate.substring(3,4);
 					if (typeCmd.equals("r")) {
+					/*
 						println("Received remote command: " + MspUpdate)
 						val channel = MspUpdate.substring(1,2)
 						val state = MspUpdate.substring(2,3)
@@ -43,6 +44,8 @@ rule "MSP on update"
 							if(state.equals("1")) callScript("off");
 							
 						} 
+					}
+					*/
 					}
 					//remote with AlarmLib
 					else if(typeCmd.equals("a")){
