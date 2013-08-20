@@ -7,10 +7,17 @@ rule "MSP on update"
 		Item Msp received update
 	then
 		if(Msp.state.toString.trim.notBlank){
+				if(! MspUpdate.startsWith("|||"))
+				{
+						//reset the string, as it does not start with |||
+						MspUpdate = "";
+				}
+				
+				//check if fresh package and starts proper
 	    		if(Msp.state.toString.trim.startsWith("|||")){
 	    			inPackage = true;
 	    		}
-	    		//only add data if it starte correct!
+	    		//only add data if it start correct!
 	    		if (inPackage){
 	    			MspUpdate = MspUpdate + Msp.state.toString.trim()
 	    			
