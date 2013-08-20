@@ -8,9 +8,14 @@ sendCommand(Light_hoek, OFF)
 sendCommand(Light_bureau, ON)
 sendCommand(Light_kast, OFF)
 
+
+sendCommand(Kast_led, 100);		
+
+
 postUpdate(onkyoPower, ON)
 postUpdate(onkyoVolume, 10)
 postUpdate(onkyoInternetRadio, ON)
 postUpdate(onkyoButon2Net, ON)
 
 //postUpdate(Scene_General, 1)
+if (!Scene_General.state.equals(1)) postUpdate(Scene_General, 1);
