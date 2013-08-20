@@ -48,25 +48,25 @@ rule "MSP on update"
 					else if(typeCmd.equals("a")){
 						//big remote
 						if (MspUpdate.contains("a1511")){
-							callScript("movie");
+							if (!Scene_General.state.equals(2)) postUpdate(Scene_General, 2);
 						}
 						else if (MspUpdate.contains("a1514")){
-							callScript("off");
+							if (!Scene_General.state.equals(0)) postUpdate(Scene_General, 0);
 						}
 						
 						
 						//tiny remote
 						else if (MspUpdate.contains("a419D41")){
-							callScript("movie");
+							if (!Scene_General.state.equals(2)) postUpdate(Scene_General, 2);
 						}
 						else if (MspUpdate.contains("a419D42")){
-							callScript("off");
+							if (!Scene_General.state.equals(0)) postUpdate(Scene_General, 0);
 						}
 						else if (MspUpdate.contains("a419D44")){
-							callScript("work");
+							if (!Scene_General.state.equals(2)) postUpdate(Scene_General, 2);
 						}
 						else if (MspUpdate.contains("a419D48")){
-							callScript("SleepTimer");
+							if (!Scene_General.state.equals(3)) postUpdate(Scene_General, 3);
 						}
 						else{
 							println("unknown remote for 'a' " +MspUpdate );

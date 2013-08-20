@@ -56,8 +56,8 @@ rule "Ledstrip met Adres1, 1byte kleuren"
 		//we scale decimally, not hexadicimal!
 		val Number scale = Math::floor( percent.floatValue * 1.27).intValue
 		val cmd = String::format("l%c%cxx\n", 0x01, scale )
-		logInfo("KastLight" , "got: " + cmd)
-		sendCommand(Msp, cmd)
+		//logInfo("KastLight" , "got: " + cmd)
+		postUpdate(Msp, cmd)
 		postUpdate(dimmer_bed, percent);
 end
 
