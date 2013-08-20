@@ -17,7 +17,7 @@ sitemap thuis label="De Hut"
   	Frame label="Weather" {
 		Text item=Weather_Balcon {
 			Frame {
-				Text item=Weather_Balcon
+				Text item=Weather_Temp_Balcony
 				Text item=Weather_Temp_Max
 				Text item=Weather_Temp_Min
 				Text item=Weather_Temp_Tomorrow
