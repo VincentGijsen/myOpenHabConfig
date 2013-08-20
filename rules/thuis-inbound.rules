@@ -12,75 +12,78 @@ rule "MSP on update"
 		
 		if(Msp.state.toString.trim.notBlank){
 	    		MspUpdate = MspUpdate + Msp.state.toString
-	    		inPackage= true;
-	    		if(!(MspUpdate.contains('\n'))) return;
-	
-				//remove line-ending for next step
-				MspUpdate = MspUpdate.trim;
-				if (MspUpdate.substring(0,1).equals("r")) {
-					println("Received remote command: " + MspUpdate)
-					val channel = MspUpdate.substring(1,2)
-					val state = MspUpdate.substring(2,3)
-					
-					if(channel.equals("D"))
-					{
-						if(state.equals("0")) callScript("off");
-						if(state.equals("1")) callScript("movie");
+	    		//String complete, :) going to process.
+	    		if(MspUpdate.contains("\n")){
+					//remove line-ending prior to next step
+					MspUpdate = MspUpdate.trim;
+					val typeCmd = MspUpdate.substring(0,1);
+					if (typeCmd.equals("r")) {
+						println("Received remote command: " + MspUpdate)
+						val channel = MspUpdate.substring(1,2)
+						val state = MspUpdate.substring(2,3)
 						
-					} 
-					if(channel.equals("C"))
-					{
-						if(state.equals("0")) callScript("work");
-						if(state.equals("1")) callScript("off");
+						if(channel.equals("D"))
+						{
+							if(state.equals("0")) callScript("off");
+							if(state.equals("1")) callScript("movie");
+							
+						} 
+						if(channel.equals("C"))
+						{
+							if(state.equals("0")) callScript("work");
+							if(state.equals("1")) callScript("off");
+							
+						} 
+					}
+					//remote with AlarmLib
+					else if(typeCmd.equals("a")){
+						//big remote
+						if (MspUpdate.substring(0,MspUpdate.length()).equals("a1511")){
+							callScript("movie");
+						}
+						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a1514")){
+							callScript("off");
+						}
 						
-					} 
-				}
-				else if(MspUpdate.substring(0,1).equals("a")){
-					//big remote
-					if (MspUpdate.substring(0,MspUpdate.length()).equals("a1511")){
-						callScript("movie");
+						
+						//tiny remote
+						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D41")){
+							callScript("movie");
+						}
+						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D42")){
+							callScript("off");
+						}
+						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D44")){
+							callScript("work");
+						}
+						else if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D48")){
+							callScript("SleepTimer");
+						}
+						else{
+							println("unknown remote for 'a' " +MspUpdate );
+						}
 					}
-					if (MspUpdate.substring(0,MspUpdate.length()).equals("a1514")){
-						callScript("off");
-					}
-					
-					
-					//tiny remote
-					if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D41")){
-						callScript("movie");
-					}
-					if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D42")){
-						callScript("off");
-					}
-					if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D44")){
-						callScript("work");
-					}
-					if (MspUpdate.substring(0,MspUpdate.length()).equals("a419D48")){
-						callScript("SleepTimer");
-					}
-				}
-				
-				else if (MspUpdate.substring(0,1).equals("c")){
-					println("received Temperature: " + MspUpdate)
-					var Number temp = 0.0f
-					if(MspUpdate.substring(2,3).equals("3")){
-						temp = Integer::parseInt(MspUpdate.substring(5,6)) * 10;
-						temp = temp + Integer::parseInt(MspUpdate.substring(6,7));
-						//the .value
-						temp = temp + (Integer::parseInt(MspUpdate.substring(7,8)) * 0.1);
-						postUpdate(Weather_Temp_Balcony, temp);	
+					else if (typeCmd.equals("c")){
+						println("received Temperature: " + MspUpdate)
+						var Number temp = 0.0f
+						if(MspUpdate.substring(2,3).equals("3")){
+							temp = Integer::parseInt(MspUpdate.substring(5,6)) * 10;
+							temp = temp + Integer::parseInt(MspUpdate.substring(6,7));
+							//the .value
+							temp = temp + (Integer::parseInt(MspUpdate.substring(7,8)) * 0.1);
+							postUpdate(Weather_Temp_Balcony, temp);	
+						}
+						else
+						{
+							println("unconfigured sensor...");
+						}
+						
 					}
 					else
 					{
-						println("unconfigured sensor...");
+						println("unknown data: " + MspUpdate);
 					}
-					
-				}
-				else
-				{
-					println("unknown data: " + MspUpdate);
-				}
-				MspUpdate = ""
-				
+					MspUpdate = ""
+				}				
 		  }
 end
