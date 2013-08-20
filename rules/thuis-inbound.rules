@@ -14,9 +14,6 @@ rule "MSP on update"
 	    		if (inPackage){
 	    			MspUpdate = MspUpdate + Msp.state.toString.trim()
 	    			
-	    		}else{
-	    			//return as we don't read data for a package;
-	    			return;
 	    		}
 	    		
 	    		
