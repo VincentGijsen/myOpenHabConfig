@@ -8,6 +8,7 @@ var float rscalar = (1.27 * 1.0).floatValue()
 var float gscalar = (1.27 * 1.0).floatValue()
 var float bscalar = (1.27 * 1.0).floatValue()
 
+var float scalar = 2.55f
 
 val Number systemcode = 31
 val Number on = 1
@@ -31,7 +32,7 @@ rule "dimmer_bed Bedlight RGB"
 		
 		
 		//we scale decimally, not hexadicimal!
-		val Number scale = Math::floor( percent.floatValue * 2.27).intValue
+		val Number scale = Math::floor( percent.floatValue * scalar).intValue
 		val cmd = String::format("l%c%xx\n", 0x02, scale )
 		sendCommand(Msp, cmd)
 		postUpdate(dimmer_bed, percent);
@@ -54,7 +55,7 @@ rule "Ledstrip met Adres1, 1byte kleuren"
 		
 		
 		//we scale decimally, not hexadicimal!
-		val Number scale = Math::floor( percent.floatValue * 2.25).intValue
+		val Number scale = Math::floor( percent.floatValue * scalar).intValue
 		val cmd = String::format("l%c%cxx\n", 0x01, scale )
 		//logInfo("KastLight" , "got: " + cmd)
 		sendCommand(Msp, cmd)
@@ -69,6 +70,8 @@ rule "Hallogeen Tv"
 	then
 	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cA%c\n", systemcode.intValue, on.intValue))
 	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cA%c\n", systemcode.intValue ,off.intValue))
+	
+	postUpdate(Light_hoek, receivedCommand);
 end
 
 rule "Bureau Lamp"
@@ -76,6 +79,7 @@ rule "Bureau Lamp"
 	then	
 	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cB%c\n", systemcode.intValue, on.intValue))
 	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cB%c\n", systemcode.intValue ,off.intValue))
+	postUpdate(Light_bureau, receivedCommand);
 end
 
 rule "Kast Lamp"
@@ -83,5 +87,6 @@ rule "Kast Lamp"
 	then	
 	if(receivedCommand==ON)sendCommand(Msp,String::format("e%cC%c\n", systemcode.intValue, on.intValue))
 	if(receivedCommand==OFF)sendCommand(Msp,String::format("e%cC%c\n", systemcode.intValue ,off.intValue))
+	postUpdate(Light_kast, receivedCommand);
 end
 
