@@ -5,6 +5,10 @@ gKeuken?.members.forEach(light | sendCommand(light, OFF))
 //gWoonkamer.members.forEach(light | sendCommand(light, ON))
 
 
+sendCommand(Light_hoek, OFF)
+sendCommand(Light_bureau, OFF)
+sendCommand(Light_kast, ON)
+
 gSleeping.members.forEach(light| sendCommand(light, OFF));
 
 //sendCommand(onkyoPower, ON);

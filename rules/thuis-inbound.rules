@@ -6,7 +6,8 @@ rule "MSP on update"
 	when 
 		Item Msp received update
 	then
-		if(Msp.state.toString.trim.notBlank){
+		val String justReceived = Msp.state.toString.trim 
+		if(justReceived.notBlank){
 				if(! MspUpdate.startsWith("|||"))
 				{
 						//reset the string, as it does not start with |||
@@ -14,38 +15,21 @@ rule "MSP on update"
 				}
 				
 				//check if fresh package and starts proper
-	    		if(Msp.state.toString.trim.startsWith("|||")){
+	    		if(justReceived.startsWith("|||")){
 	    			inPackage = true;
 	    		}
 	    		//only add data if it start correct!
 	    		if (inPackage){
-	    			MspUpdate = MspUpdate + Msp.state.toString.trim()
+	    			MspUpdate = MspUpdate + justReceived
 	    			
 	    		}
 	    		
 	    		
 	    		if(inPackage && MspUpdate.endsWith(";;;")){
+	    			print("processing: "+ MspUpdate)
 					val typeCmd = MspUpdate.substring(3,4);
 					if (typeCmd.equals("r")) {
-					/*
-						println("Received remote command: " + MspUpdate)
-						val channel = MspUpdate.substring(1,2)
-						val state = MspUpdate.substring(2,3)
-						
-						if(channel.equals("D"))
-						{
-							if(state.equals("0")) callScript("off");
-							if(state.equals("1")) callScript("movie");
-							
-						} 
-						if(channel.equals("C"))
-						{
-							if(state.equals("0")) callScript("work");
-							if(state.equals("1")) callScript("off");
-							
-						} 
-					}
-					*/
+						//obsolete
 					}
 					//remote with AlarmLib
 					else if(typeCmd.equals("a")){
@@ -66,7 +50,7 @@ rule "MSP on update"
 							if (!Scene_General.state.equals(0)) postUpdate(Scene_General, 0);
 						}
 						else if (MspUpdate.contains("a419D44")){
-							if (!Scene_General.state.equals(2)) postUpdate(Scene_General, 2);
+							if (!Scene_General.state.equals(1)) postUpdate(Scene_General, 1);
 						}
 						else if (MspUpdate.contains("a419D48")){
 							if (!Scene_General.state.equals(3)) postUpdate(Scene_General, 3);
