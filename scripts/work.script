@@ -1,6 +1,8 @@
 logInfo("Work.script", "WorkScript")
 
 
+sendCommand(Kast_led, 100);		
+
 gKeuken?.members.forEach(light | postUpdate(light, OFF))
 
 
@@ -8,8 +10,6 @@ sendCommand(Light_hoek, OFF)
 sendCommand(Light_bureau, ON)
 sendCommand(Light_kast, OFF)
 
-
-sendCommand(Kast_led, 100);		
 
 
 postUpdate(onkyoPower, ON)
