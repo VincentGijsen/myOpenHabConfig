@@ -30,7 +30,7 @@ rule "dimmer_bed Bedlight RGB"
 		if(percent<0)   percent = 0
 		if(percent>100) percent = 100
 		
-	    val cmd = String::format("l%c%xx\n", 0x01, percent)
+	    val cmd = String::format("l%c%xx\n", 0x01, percent.intValue)
 		sendCommand(Msp, cmd)
 		postUpdate(dimmer_bed, percent);
 end
@@ -50,7 +50,7 @@ rule "Ledstrip met Adres1, 1byte kleuren"
 		if(percent<0)   percent = 0
 		if(percent>100) percent = 100
 		
-		val cmd = String::format("l%c%cxx\n", 0x02, percent)
+		val cmd = String::format("l%c%cxx\n", 0x02, percent.intValue)
 		//logInfo("KastLight" , "got: " + cmd)
 		sendCommand(Msp, cmd)
 		postUpdate(Kast_led, percent);
