@@ -30,10 +30,7 @@ rule "dimmer_bed Bedlight RGB"
 		if(percent<0)   percent = 0
 		if(percent>100) percent = 100
 		
-		
-		//we scale decimally, not hexadicimal!
-		val Number scale = Math::floor( percent.floatValue * scalar).intValue
-		val cmd = String::format("l%c%xx\n", 0x01, scale )
+	    val cmd = String::format("l%c%xx\n", 0x01, percent)
 		sendCommand(Msp, cmd)
 		postUpdate(dimmer_bed, percent);
 end
@@ -53,10 +50,7 @@ rule "Ledstrip met Adres1, 1byte kleuren"
 		if(percent<0)   percent = 0
 		if(percent>100) percent = 100
 		
-		
-		//we scale decimally, not hexadicimal!
-		val Number scale = Math::floor( percent.floatValue * scalar).intValue
-		val cmd = String::format("l%c%cxx\n", 0x02, scale )
+		val cmd = String::format("l%c%cxx\n", 0x02, percent)
 		//logInfo("KastLight" , "got: " + cmd)
 		sendCommand(Msp, cmd)
 		postUpdate(Kast_led, percent);
