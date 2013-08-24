@@ -57,6 +57,28 @@ rule "Ledstrip met Adres1, 1byte kleuren"
 end
 
 
+rule "Ledstrip met Adres2, 1byte kleuren"
+	when
+		Item Muur_strip received command
+	then
+	    var Number percent = 0
+	
+		if(Muur_strip.state instanceof DecimalType) percent = Muur_strip.state as DecimalType 
+			
+		if(receivedCommand==INCREASE) percent = percent + 5
+		if(receivedCommand==DECREASE) percent = percent - 5
+		if(receivedCommand==OFF) percent = 0
+		
+		if(percent<0)   percent = 0
+		if(percent>100) percent = 100
+		
+		val cmd = String::format("l%c%cxx\n", 0x03, percent.intValue)
+		//logInfo("KastLight" , "got: " + cmd)
+		sendCommand(Msp, cmd)
+		postUpdate(Muur_strip, percent);
+end
+
+
 
 
 rule "Hallogeen Tv"
